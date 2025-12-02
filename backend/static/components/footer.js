@@ -12,7 +12,7 @@ class MedFooter extends HTMLElement {
                 footer {
                     text-align: center;
                     padding: 20px;
-                    background: #502a8e;
+                    background: rgba(50, 135, 146, 0.15);
                     font-size: 0.9rem;
                     color: #8892a5;
                 }

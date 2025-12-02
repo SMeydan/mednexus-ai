@@ -8,126 +8,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="/static/components/header.js" type="module"></script>
   <script src="/static/components/footer.js" type="module"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top right, #502a8e, #01020a);
-      color: #fff;
+      /* Arka Plan: Yumuşak Nane Geçişi */
+      background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .container {
       max-width: 600px;
-      margin: 80px auto;
-      background: rgba(209, 233, 252, 0.08);
-      border-radius: 12px;
-      padding: 4rem 2.5rem;
-      /* yatay ve dikey ortalama */
-      box-shadow: 0 0 25px rgba(0, 170, 255, 0.15);
-      border: 1px solid rgba(0, 170, 255, 0.2);
-      text-align: center;
+      width: 90%;
+      margin: 60px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 3.5rem 2.5rem;
+      /* Hafif ve modern gölge */
+      box-shadow: 0 20px 50px rgba(6, 95, 70, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+      text-align: left; /* Form elemanları sola yaslı daha iyi durur */
       position: relative;
       box-sizing: border-box;
     }
 
     h1 {
       text-align: center;
-      background: linear-gradient(90deg, #ceefff, #8660ba);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 2rem;
+      /* Başlık Rengi: Koyu Yeşil */
+      color: #064e3b;
+      font-size: 2.2rem;
+      font-weight: 800;
       margin-bottom: 30px;
+      letter-spacing: -0.5px;
+      background: none;
+      -webkit-text-fill-color: initial;
     }
 
     label {
       display: block;
-      margin-top: 15px;
+      margin-top: 20px;
+      margin-bottom: 8px;
       font-weight: 600;
-      color: #b3c0d4;
+      color: #374151; /* Koyu Gri */
+      font-size: 0.95rem;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 10px 12px;
-      margin-top: 6px;
-      border: 1px solid rgba(219, 193, 255, 0.3);
-      border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-size: 15px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      background-color: #f9fafb;
+      color: #1f2937;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
     }
 
     input:focus,
     textarea:focus {
       outline: none;
-      border-color: #00aaff;
-      box-shadow: 0 0 8px rgba(0, 170, 255, 0.4);
+      /* Focus Rengi: Zümrüt Yeşili */
+      border-color: #10b981;
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
     }
 
-    .btn-outline {
+    button {
       width: 100%;
       margin-top: 30px;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      color: #d7f2ff;
-      background-color: transparent;
-      border: 2px solid transparent;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      /* Buton Gradyanı: Zümrüt Yeşili */
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
       cursor: pointer;
-      background-image: linear-gradient(90deg, #00aaff, #8660ba),
-        linear-gradient(90deg, #00aaff, #8660ba);
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
     }
 
-    .btn-outline:hover {
-      color: #fff;
-      background-image: linear-gradient(90deg, #00aaff, #8660ba);
-      box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
+    button:hover {
       transform: translateY(-2px);
+      background: linear-gradient(135deg, #34d399, #059669);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
     }
 
     .info {
       margin-top: 40px;
       text-align: center;
-      font-size: 15px;
-      color: #b3c0d4;
+      font-size: 0.95rem;
+      color: #6b7280;
       line-height: 1.8;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 25px;
+    }
+
+    .info p {
+        margin: 8px 0;
     }
 
     .info a {
-      color: #00aaff;
+      color: #059669; /* Link Rengi: Yeşil */
       text-decoration: none;
-      transition: color 0.3s;
+      font-weight: 600;
+      transition: color 0.2s;
     }
 
     .info a:hover {
-      color: #8660ba;
+      color: #047857;
+      text-decoration: underline;
     }
 
+    /* Başarı Mesajı Kutusu */
     .success-box {
       display: none;
-      margin-top: 20px;
+      margin-bottom: 25px;
       padding: 15px;
-      border-radius: 8px;
+      border-radius: 10px;
       text-align: center;
       font-weight: 600;
-      background: #28a745;
-      color: white;
+      /* Başarı renkleri: Açık yeşil zemin, koyu yeşil yazı */
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      animation: fadeIn 0.5s ease;
     }
 
-    button{
-      margin-top: 15px;
-      border: none;
-      border-radius: 5px;
-      background: linear-gradient(90deg, #00aaff, #8660ba);
-      color: white;
-      padding: 15px;
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
+
   </style>
 </head>
 
@@ -135,35 +156,44 @@
   <med-header></med-header>
 
   <div class="container">
-    <div id="successBox" class="success-box">Email Sended ✔</div>
+    <div id="successBox" class="success-box">Message Sent Successfully ✔</div>
+    
     <h1>Contact Us</h1>
+    
     <form id="contactForm">
       <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" name="name" required placeholder="John Doe" />
 
       <label for="email">Your Email</label>
-      <input type="email" id="email" name="email" required />
+      <input type="email" id="email" name="email" required placeholder="john@example.com" />
 
       <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+      <textarea id="message" name="message" rows="5" required placeholder="How can we help you?"></textarea>
 
       <button type="submit">Send Message</button>
     </form>
 
     <div class="info">
       <p>Email: <a href="mailto:info@mednexus.com">info@mednexus.com</a></p>
-      <p>Phone: <a href="tel:444 0 444">444 0 444</a></p>
+      <p>Phone: <a href="tel:4440444">444 0 444</a></p>
       <p>Address: Defterdar, Otakçılar Cd. No:78, 34055 Eyüpsultan/İstanbul</p>
     </div>
   </div>
 
   <med-footer></med-footer>
+  
   <script>
     const form = document.getElementById("contactForm");
     const successBox = document.getElementById("successBox");
+    const submitBtn = form.querySelector("button");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // Buton durumunu değiştir (Kullanıcıya geri bildirim)
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "Sending...";
+      submitBtn.disabled = true;
 
       const payload = {
         name: document.getElementById("name").value,
@@ -179,11 +209,22 @@
         if (res) {
           successBox.style.display = "block"; 
           form.reset();
+          // Sayfayı yukarı kaydır ki mesaj görünsün
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-          alert("Failed: " + data.detail);
+          alert("Failed to send message.");
         }
       } catch (error) {
-        alert("Request failed");
+        alert("Request failed. Please try again later.");
+      } finally {
+        // Butonu eski haline getir
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+        // 5 saniye sonra başarı mesajını gizle
+        setTimeout(() => {
+            successBox.style.display = "none";
+        }, 5000);
       }
     });
   </script>

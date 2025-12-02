@@ -10,138 +10,115 @@
     <script src="/static/components/header.js" type="module"></script>
     <script src="/static/components/footer.js" type="module"></script>
     <style>
+        /* 1. GENEL SAYFA AYARLARI */
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at top right, #502a8e, #01020a);
-            color: #fff;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: #00aaff;
-            font-weight: 600;
-            border: 2px solid transparent;
-            border-radius: 6px;
-            padding: 8px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-image: linear-gradient(#0a0f1f, #0a0f1f),
-                linear-gradient(90deg, #00aaff, #8660ba);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-        }
-
-        .btn-outline:hover {
-            color: #fff;
-            background-image: linear-gradient(90deg, #00aaff, #8660ba);
-            box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
-            transform: translateY(-2px);
+            /* Nane yeşili (Mint) Gradient Geçişi */
+            background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+            color: #333;
         }
 
         .section {
-            padding: 80px;
+            padding: 80px 20px;
             text-align: center;
+            min-height: 80vh;
         }
 
         .section h1 {
             font-size: 2.5rem;
-            color: #d3f0ff;
-            margin-bottom: 50px;
-            letter-spacing: 1px;
+            /* Başlık rengi: Koyu Orman Yeşili (Otorite için) */
+            color: #14532d;
+            margin-bottom: 60px;
+            letter-spacing: -0.5px;
+            font-weight: 800;
         }
 
+        /* 2. EKİP KARTLARI GRID YAPISI */
         .team {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
+        /* 3. KART TASARIMI */
         .member {
-            background: rgba(255, 255, 255, 0.033);
+            background: #ffffff; /* Kartlar Bembeyaz */
             padding: 40px 25px;
-            border-radius: 16px;
+            border-radius: 24px;
             width: 280px;
             text-align: center;
-            box-shadow: 0 0 15px rgba(0, 170, 255, 0.1);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* İnce, nane yeşili kenarlık */
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            
+            /* Hafif yeşilimsi gölge */
+            box-shadow: 0 10px 30px rgba(20, 83, 45, 0.03);
         }
 
-        .member::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 16px;
-            padding: 2px;
-            background: linear-gradient(90deg, #00aaff, #8660ba, #00aaff);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: borderGlow 4s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            100% {
-                background-position: 200% 50%;
-            }
-        }
-
+        /* Kart Hover Efekti */
         .member:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 0 30px rgba(0, 170, 255, 0.3);
+            transform: translateY(-10px);
+            /* Hoverda gölge belirginleşir */
+            box-shadow: 0 20px 40px rgba(22, 163, 74, 0.15);
+            /* Kenarlık rengi canlanır (Mint Green) */
+            border-color: #4ade80;
         }
 
+        /* Resim Alanı */
         .member img {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 15px;
-            border: 3px solid #00aaff;
-            box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
-            animation: pulse 3s infinite;
+            margin-bottom: 20px;
+            /* Resim çerçevesi: Çok açık nane */
+            border: 4px solid #d1fae5;
+            transition: all 0.3s ease;
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
-            }
-
-            50% {
-                box-shadow: 0 0 25px rgba(134, 96, 186, 0.6);
-            }
-
-            100% {
-                box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
-            }
+        .member:hover img {
+            /* Hoverda resim çerçevesi koyu nane/zümrüt rengine döner */
+            border-color: #10b981;
+            transform: scale(1.05);
         }
 
+        /* İsim */
         .member h3 {
-            color: #d3f0ff;
-            margin: 15px 0 8px;
-            font-size: 1.2rem;
+            /* İsimler canlı Zümrüt Yeşili (Emerald) */
+            color: #059669;
+            margin: 10px 0 5px;
+            font-size: 1.25rem;
+            font-weight: 700;
         }
 
+        /* Unvan / Açıklama (Opsiyonel kullanım için) */
         .member p {
-            color: #cfd8e3;
+            color: #64748b; /* Gri-Mavi ton, yeşille uyumlu */
             font-size: 0.95rem;
+            font-weight: 500;
         }
 
+        /* MOBİL UYUM */
         @media (max-width: 900px) {
             .section {
-                padding: 40px 30px;
+                padding: 40px 20px;
             }
 
             .team {
                 flex-direction: column;
                 align-items: center;
+            }
+            
+            .member {
+                width: 100%;
+                max-width: 320px;
             }
         }
     </style>
@@ -150,34 +127,37 @@
 <body>
 
     <med-header></med-header>
+
     <section class="section">
-        <h1>Our Team</h1>
+        <h1>Meet Our Team</h1>
         <div class="team">
             <div class="member">
                 <img src="/static/imgs/Sudenur.jpg" alt="Sudenur Meydan">
                 <h3>Sudenur Meydan</h3>
             </div>
             <div class="member">
-                <img src="/static/imgs/Neslihan.jpg" alt="Sudenur Meydan">
+                <img src="/static/imgs/Neslihan.jpg" alt="Neslihan Doğan">
                 <h3>Neslihan Doğan</h3>
             </div>
             <div class="member">
-                <img src="/static/imgs/Esra.jpg" alt="Sudenur Meydan">
+                <img src="/static/imgs/Esra.jpg" alt="Esra Kazak">
                 <h3>Esra Kazak</h3>
             </div>
             <div class="member">
-                <img src="/static/imgs/Halil.jpg" alt="Sudenur Meydan">
+                <img src="/static/imgs/Halil.jpg" alt="Halil İbrahim Kurnaz">
                 <h3>Halil İbrahim Kurnaz</h3>
             </div>
             <div class="member">
-                <img src="/static/imgs/Umut.jpg" alt="Sudenur Meydan">
+                <img src="/static/imgs/Umut.jpg" alt="Umut Yağız Yerli">
                 <h3>Umut Yağız Yerli</h3>
             </div>
             <div class="member">
-                <img src="/static/imgs/Enes.jpg" alt="Sudenur Meydan">
+                <img src="/static/imgs/Enes.jpg" alt="Enes Salih Gökçek">
                 <h3>Enes Salih Gökçek</h3>
             </div>
+        </div> 
     </section>
+
     <med-footer></med-footer>
 </body>
 

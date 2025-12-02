@@ -17,6 +17,9 @@ def get_patient(db: Session, patient_id: int):
         "images": images
     }
 
+def only_get_patient(db: Session, patient_id: int):
+    return db.query(models.Patient).filter(models.Patient.id == patient_id).first()
+
 
 def create_patient(db: Session, patient: schemas.PatientCreate):
     db_patient = models.Patient(
@@ -33,14 +36,19 @@ def create_patient(db: Session, patient: schemas.PatientCreate):
 
 
 def update_patient(db: Session, patient_id: int, patient: schemas.PatientUpdate):
-    db_patient = get_patient(db, patient_id)
+
+    db_patient = only_get_patient(db, patient_id)
+
     if not db_patient:
         return None
 
     data = patient.dict(exclude_unset=True)
 
-    if "gender" in data and data["gender"]:
-        data["gender"] = data["gender"].lower()
+    if "gender" in data:
+        if not data["gender"]:
+            data["gender"] = None
+        else:
+            data["gender"] = data["gender"].lower()
 
     for field, value in data.items():
         setattr(db_patient, field, value)

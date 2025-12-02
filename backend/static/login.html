@@ -13,41 +13,43 @@
       margin: 0;
       font-family: 'Inter', sans-serif;
       height: 100vh;
-      background: radial-gradient(circle at top right, #502a8e, #01020a);
-      color: #fff;
+      /* Arka Plan: Yumuşak Mint Geçişi */
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      color: #333;
       display: flex;
       flex-direction: column;
-      justify-content:space-between;
+      justify-content: space-between;
     }
 
     .login-container {
-      background: rgba(209, 233, 252, 0.08);
+      background: #ffffff;
       border-radius: 12px;
       padding: 4rem 2.5rem;
       width: 100%;
       max-width: 420px;
-      margin: auto;                 /* yatay ve dikey ortalama */
-      box-shadow: 0 0 25px rgba(0, 170, 255, 0.15);
-      border: 1px solid rgba(0, 170, 255, 0.2);
+      margin: auto;
+      /* Yeşil tonlu yumuşak gölge */
+      box-shadow: 0 20px 40px rgba(6, 95, 70, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
       text-align: center;
       position: relative;
       box-sizing: border-box;
     }
 
+    /* Animasyonlu Çerçeve - Yeşil/Zümrüt Tonları */
     .login-container::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    padding: 2px;
-    background: linear-gradient(90deg, #00aaff, #8660ba, #00aaff);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: borderGlow 6s linear infinite;
-    pointer-events: none; /* 👈 bu satırı ekle */
-}
-
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 12px;
+        padding: 2px;
+        background: linear-gradient(90deg, #6ee7b7, #059669, #6ee7b7);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: borderGlow 6s linear infinite;
+        pointer-events: none;
+    }
 
     @keyframes borderGlow {
       0% { background-position: 0% 50%; }
@@ -57,9 +59,11 @@
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
-      background: #b6e7ff;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      /* Başlık Rengi: Koyu Orman Yeşili */
+      color: #064e3b;
+      font-weight: 800;
+      background: none;
+      -webkit-text-fill-color: initial;
     }
 
     .form-group {
@@ -70,54 +74,67 @@
     label {
       display: block;
       margin-bottom: 0.4rem;
-      color: #cfd8e3;
+      /* Label Rengi: Gri */
+      color: #4b5563;
       font-size: 0.95rem;
+      font-weight: 600;
     }
 
     input {
       width: 100%;
-      padding: 0.6rem;
-      border: 1px solid rgba(0, 170, 255, 0.3);
-      border-radius: 6px;
-      background-color: #331b5d00;
-      color: #fff;
+      padding: 0.75rem;
+      /* Input Kenarlığı: Hafif gri */
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background-color: #f9fafb;
+      color: #1f2937;
       font-size: 1rem;
       transition: all 0.3s ease;
+      box-sizing: border-box;
     }
 
     input:focus {
-      border-color: #00aaff;
+      /* Focus Rengi: Canlı Yeşil */
+      border-color: #10b981;
+      background-color: #ffffff;
       outline: none;
-      box-shadow: 0 0 8px rgba(0, 170, 255, 0.5);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+    
+    input::placeholder {
+        color: #9ca3af;
     }
 
     .login-btn {
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.85rem;
       border: none;
-      border-radius: 6px;
-      background: linear-gradient(90deg, #00aaff, #8660ba);
+      border-radius: 8px;
+      /* Buton: Zümrüt Yeşili Gradyan */
+      background: linear-gradient(90deg, #10b981, #047857);
       color: #fff;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
+      margin-top: 10px;
     }
 
     .login-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(134, 96, 186, 0.4);
+      box-shadow: 0 10px 25px rgba(4, 120, 87, 0.3);
     }
 
     .message {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       font-size: 0.95rem;
-      color: #ff6b6b;
+      font-weight: 600;
+      color: #dc2626; /* Hata mesajı kırmızı */
       display: none;
     }
 
     .success {
-      color: #00ffae;
+      color: #059669; /* Başarılı mesajı yeşil */
     }
 
   </style>
@@ -159,7 +176,7 @@
         localStorage.setItem('userName', 'doctor');
         setTimeout(() => {
           window.location.href = "/home"; // yönlendirme sayfası
-        }, 200);
+        }, 800);
       } else {
         message.textContent = "❌ Invalid username or password.";
         message.classList.remove("success");

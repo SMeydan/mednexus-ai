@@ -10,212 +10,199 @@
     <script src="/static/components/header.js" type="module"></script>
     <script src="/static/components/footer.js" type="module"></script>
 
-    <style>
-        .slider-container {
-            overflow: hidden;
-            position: relative;
-        }
+<style>
+    /* 1. GENEL AYARLAR */
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        /* Arka plan: Beyazdan, seçtiğin rengin çok çok açık (pastel) tonuna geçiş */
+        background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
+        color: #333; /* Okunabilirlik için koyu gri metin */
+    }
 
-        .slider {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-            will-change: transform;
-        }
+    /* 2. HERO ALANI */
+    .hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        padding: 60px 80px;
+        /* Sağ üstten gelen ışık efekti: Senin renginin açık tonu */
+        background: radial-gradient(circle at top right, #ccecee, #f9feff);
+        box-sizing: border-box;
+        min-height: 420px;
+    }
 
-        .card {
-            min-width: 250px;
-            border-radius: 12px;
-            padding: 20px;
-            background: linear-gradient(90deg, #00aaff, #8660ba);
-            color: white;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
+    /* Hero Sol Kutu (Cam Efekti) */
+    .hero>div:first-child {
+        flex: 1 1 60%;
+        min-width: 280px;
+        height: 380px;
+        border-radius: 24px;
+        /* Beyaz buzlu cam */
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        padding: 30px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        /* Senin rengine uyumlu hafif gölge */
+        box-shadow: 0 10px 40px rgba(50, 135, 146, 0.1);
+    }
 
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, #0f2a44 0%, #102b3f 100%);
-            color: #fff;
-        }
+    /* Hero Resim Alanı */
+    .hero-img {
+        flex: 0 0 420px;
+        width: 380px;
+        height: 380px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(50, 135, 146, 0.1);
+    }
 
+    .hero-img img {
+        width: 95%;
+        height: 95%;
+        object-fit: cover;
+        border-radius: 20px;
+        display: block;
+    }
+
+    /* Medya Sorguları */
+    @media (max-width: 860px) {
         .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            padding: 60px 80px;
-            background: radial-gradient(circle at top right, #502a8e, #01020a);
-            box-sizing: border-box;
-            min-height: 420px;
+            flex-direction: column;
+            text-align: center;
+            padding: 36px 20px;
+            min-height: auto;
         }
 
         .hero>div:first-child {
-            flex: 1 1 60%;
-            min-width: 280px;
-            height: 380px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
+            order: 1;
         }
 
         .hero-img {
-            flex: 0 0 420px;
-            width: 380px;
-            height: 380px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            order: 2;
+            flex: 0 0 320px;
+            width: 320px;
+            height: 320px;
+            margin-top: 20px;
         }
+    }
 
-        .hero-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+    /* 3. BUTONLAR */
+    .btn-group {
+        display: flex;
+        gap: 15px;
+    }
 
-        /* Küçük ekranlarda üst üste gelsin */
-        @media (max-width: 860px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 36px 20px;
-                min-height: auto;
-            }
+    .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+    }
 
-            .hero>div:first-child {
-                order: 1;
-            }
+    /* Özel Renkli Outline Buton */
+    .btn-outline {
+        background-color: transparent;
+        /* Yazı rengi senin seçtiğin #328792 */
+        color: #328792; 
+        border: 2px solid transparent; 
+        border-radius: 12px;
+        padding: 10px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        /* Kenarlık gradyanı: Senin rengin ve biraz daha açığı */
+        background-image: linear-gradient(#ffffff, #ffffff),
+            linear-gradient(90deg, #5dcbd6, #328792);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        
+        font-family: 'Inter', sans-serif;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(50, 135, 146, 0.1);
+    }
 
-            .hero-img {
-                order: 2;
-                flex: 0 0 320px;
-                width: 320px;
-                height: 320px;
-                margin-top: 20px;
-            }
-        }
+    .btn-outline:hover {
+        color: #fff; /* Hoverda yazı beyaz */
+        /* Hoverda zemin tamamen senin renginin gradyanı */
+        background-image: linear-gradient(90deg, #5dcbd6, #328792);
+        box-shadow: 0 8px 20px rgba(50, 135, 146, 0.35);
+        transform: translateY(-2px);
+        border: 2px solid transparent;
+    }
 
-        .btn-group {
-            display: flex;
-            gap: 15px;
-        }
+    /* 4. SLIDER BÖLÜMÜ */
+    .info-section {
+        /* Beyaz ile senin renginin çok açık tonu arasında geçiş */
+        background: linear-gradient(180deg, #f0fbff 0%, #ffffff 100%);
+        padding: 60px 0;
+        overflow: hidden;
+        height: 35vh;
+    }
 
-        .btn {
-            padding: 12px 24px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
+    .slider-container {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+    }
 
-        .btn-outline {
-            background-color: transparent;
-            color: #ceefff;
-            border: 2px solid transparent;
-            border-radius: 6px;
-            padding: 8px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-image: linear-gradient(#211f30, #211f30),
-                linear-gradient(90deg, #00aaff, #8660ba);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            font-family: 'Inter', sans-serif;
-            text-decoration: none;
-        }
+    .slider {
+        display: flex;
+        transition: transform 0.8s ease-in-out;
+        will-change: transform;
+    }
 
-        .btn-outline:hover {
-            color: #fff;
-            background-image: linear-gradient(90deg, #00aaff, #8660ba);
-            box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
-            transform: translateY(-2px);
-        }
+    /* 5. KARTLAR */
+    .card {
+        min-width: 250px;
+        border-radius: 20px;
+        padding: 24px 30px;
+        position: relative;
+        background-color: #fff; /* Kartlar beyaz */
+        margin-right: 30px;
+        color: #6b7280; /* Pasif yazı gri */
+        font-weight: 500;
+        border: 1px solid rgba(50, 135, 146, 0.1); /* Çok hafif renkli kenarlık */
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
 
-        .info-section {
-            background: radial-gradient(circle at top right, #351c61, #01020a);
-            padding: 60px 0;
-            overflow: hidden;
-            height: 35vh;
-        }
+    .card:hover {
+        color: #fff;
+        /* Hover olunca senin renginin canlı gradyanı */
+        background-image: linear-gradient(135deg, #6dd5e0, #328792);
+        
+        box-shadow: 0 15px 30px -5px rgba(50, 135, 146, 0.3);
+        transform: translateY(-5px);
+        border-color: transparent;
+    }
 
-        .slider-container {
-            overflow: hidden;
-            width: 100%;
-            position: relative;
+    .card h3 {
+        color: #328792; /* Başlıklar senin rengin */
+        margin-bottom: 10px;
+        font-size: 1.25rem;
+    }
 
-        }
-
-        .slider {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-            will-change: transform;
-        }
-
-        .card {
-            position: relative;
-            background-color: transparent;
-            margin-right: 30px;
-            color: #dedcdc;
-            font-weight: 600;
-            border: 2px solid transparent;
-            border-radius: 15px;
-            padding: 20px 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(209, 233, 252, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-        }
-
-        .card:hover {
-            color: #fff;
-            background-image: linear-gradient(90deg, #00aaff, #8660ba);
-            box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .card h3 {
-            color: #ceefff;
-            margin-bottom: 10px;
-        }
-
-        .hero-img {
-            width: 380px;
-            height: 380px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-img img {
-            width: 95%;
-            height: 95%;
-            object-fit: cover;
-            border-radius: 5%;
-        }
-    </style>
+    .card:hover h3 {
+        color: #fff; /* Hoverda başlık beyaz */
+    }
+</style>
 </head>
 
 <body>

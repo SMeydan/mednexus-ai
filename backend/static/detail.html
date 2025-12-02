@@ -6,7 +6,7 @@
   <title>Patient Details – MedNexus</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="/static/components/header.js" type="module"></script>
   <script src="/static/components/footer.js" type="module"></script>
 
@@ -14,107 +14,158 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top right, #502a8e, #01020a);
-      color: #fff;
+      /* Arka Plan: Yumuşak Nane Geçişi */
+      background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+      color: #333;
+      min-height: 100vh;
     }
 
     .container {
       max-width: 1100px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 60px 20px;
     }
 
     h1 {
       font-size: 2.2rem;
-      margin-bottom: 20px;
-      background: linear-gradient(90deg, #d3f0ff, #8660ba);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+      /* Başlık Rengi: Koyu Orman Yeşili */
+      color: #064e3b;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
+    /* KART TASARIMI (SECTION) */
     .section {
-      background: rgba(53, 29, 92, 0.75);
-      backdrop-filter: blur(8px);
+      background: #ffffff;
       padding: 30px;
       border-radius: 16px;
       margin-top: 25px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 25px rgba(0, 170, 255, 0.12);
+      /* Hafif yeşil/gri gölge */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+      transition: transform 0.2s ease;
+    }
+    
+    .section:hover {
+        box-shadow: 0 15px 40px rgba(16, 185, 129, 0.08);
     }
 
     .section-title {
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       font-weight: 700;
       margin-bottom: 20px;
-      color: #d3f0ff;
+      /* Başlık Rengi: Zümrüt Yeşili */
+      color: #059669;
+      border-bottom: 2px solid #ecfdf5;
+      padding-bottom: 10px;
+      display: inline-block;
     }
 
+    /* GRID YAPISI */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 15px;
     }
 
+    /* BİLGİ KUTUCUKLARI */
     .item {
-      background: #2b184c;
-      padding: 14px;
+      background: #f9fafb;
+      padding: 16px;
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid #e5e7eb;
       font-size: 0.95rem;
+      color: #374151;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .item strong {
+        color: #047857; /* Etiket rengi koyu yeşil */
     }
 
+    /* TEXTAREA */
     textarea {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 15px;
       padding: 15px;
       border-radius: 10px;
-      background: #24153d;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      color: #1f2937;
       resize: vertical;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
     }
 
+    textarea:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    /* BUTONLAR (Modern Yeşil Stil) */
     .btn {
-      padding: 10px 20px;
-      background: linear-gradient(90deg, #00aaff, #8660ba);
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #10b981, #059669);
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
-      margin-top: 10px;
-      box-shadow: 0 0 12px rgba(134, 96, 186, 0.5);
-      transition: 0.2s;
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s ease;
       color: white;
+      font-size: 0.95rem;
     }
 
     .btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #34d399, #059669);
     }
 
+    /* OUTPUT ALANI (PRE) */
     pre {
-      background: #1f1235;
-      padding: 18px;
+      background: #f0fdf4; /* Çok açık nane */
+      padding: 20px;
       border-radius: 10px;
       white-space: pre-wrap;
-      margin-top: 10px;
+      margin-top: 20px;
       font-size: 0.9rem;
+      border: 1px solid #bbf7d0;
+      color: #166534; /* Koyu yeşil yazı */
+      line-height: 1.5;
     }
 
+    /* GERİ DÖN LİNKİ */
     .back-btn {
-      margin-top: 25px;
-      display: inline-block;
+      margin-top: 30px;
+      display: inline-flex;
+      align-items: center;
       cursor: pointer;
-      color: #76cef9;
-      font-weight: 500;
-      text-decoration: underline;
+      color: #059669;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .back-btn:hover {
+        color: #047857;
+        text-decoration: underline;
     }
 
-    /* IMAGES */
+    /* RESİMLER */
     .images-row {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       overflow-x: auto;
-      padding-top: 8px;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
     .img-box {
@@ -122,7 +173,15 @@
       height: 130px;
       border-radius: 10px;
       object-fit: cover;
-      border: 2px solid rgba(255, 255, 255, 0.1);
+      border: 2px solid #e5e7eb;
+      transition: all 0.3s;
+      background: #fff;
+    }
+    
+    .img-box:hover {
+        border-color: #10b981;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     @media (max-width: 850px) {
@@ -137,42 +196,37 @@
   <med-header></med-header>
 
   <div class="container">
+    <div onclick="location.href='/home.html'" class="back-btn">← Back to Patient List</div>
+    
     <h1>Patient Details</h1>
 
-    <!-- Patient Info -->
     <div class="section">
       <div class="section-title">General Information</div>
       <div id="patientInfo" class="grid"></div>
     </div>
 
-    <!-- Knowledge -->
     <div class="section">
       <div class="section-title">Medical Knowledge</div>
       <div id="knowledgeInfo" class="grid"></div>
     </div>
 
-    <!-- IMAGES -->
     <div class="section">
       <div class="section-title">Uploaded Medical Images</div>
       <div id="imagesRow" class="images-row"></div>
     </div>
 
-    <!-- ASK AI -->
     <div class="section">
       <div class="section-title">Ask MedNexus AI</div>
-      <textarea id="askInput" placeholder="Ask anything about this patient..."></textarea>
-      <button class="btn" id="askBtn">Ask AI</button>
-      <pre id="askResult"></pre>
-    </div>
+      <textarea id="askInput" rows="3" placeholder="Ask anything about this patient... (e.g., 'Does this patient have a high risk of diabetes?')"></textarea>
+      <button class="btn" id="askBtn">Ask AI Assistant</button>
+      <pre id="askResult" style="display:none"></pre> </div>
 
-    <!-- REPORT -->
     <div class="section">
       <div class="section-title">AI Medical Analysis Report</div>
-      <button class="btn" id="reportBtn">Generate Report</button>
-      <pre id="reportOutput"></pre>
-    </div>
+      <p style="color:#666; font-size: 0.9rem; margin-bottom:10px;">Generate a comprehensive medical report based on patient data.</p>
+      <button class="btn" id="reportBtn">Generate Full Report</button>
+      <pre id="reportOutput" style="display:none"></pre> </div>
 
-    <div class="back-btn" onclick="location.href='/home.html'">← Back to Patient List</div>
   </div>
 
   <med-footer></med-footer>
@@ -181,6 +235,15 @@
     const patientId = window.location.pathname.split("/").pop();
 
     async function loadPatient() {
+      // Mock Data (Backend olmadığı için) - Test ederken burayı silebilirsin
+      /* const data = {
+         patient: { full_name: "John Doe", national_id: "123456789", age: 45, gender: "Male", complaint: "Chest pain", created_at: "2023-10-27" },
+         knowledge: { glucose: 95, bmi: 24.5, hba1c: 5.4, diabetes: false, smoking: true },
+         images: ["https://via.placeholder.com/150"]
+      };
+      */
+
+      // Gerçek Fetch (Senin kodun)
       const res = await fetch(`/api/patient/${patientId}`);
       const data = await res.json();
 
@@ -202,16 +265,16 @@
         "BMI": k.bmi,
         "HbA1c": k.hba1c,
         "Cholesterol": k.total_cholesterol,
-        "Diabetes": k.diabetes,
-        "Heart Disease": k.heart_disease,
-        "Smoking": k.smoking,
+        "Diabetes": k.diabetes ? "Yes" : "No",
+        "Heart Disease": k.heart_disease ? "Yes" : "No",
+        "Smoking": k.smoking ? "Yes" : "No",
         "Cigarettes/day": k.cigarettes_per_day,
-        "Physical Activity": k.physical_activity,
-        "Stress": k.stress,
-        "Alcohol": k.alcohol,
-        "Chronic Disease": k.chronic_disease,
-        "Hypertension": k.prevalent_hypertension,
-        "Stroke History": k.prevalent_stroke
+        "Physical Activity": k.physical_activity ? "Yes" : "No",
+        "Stress": k.stress ? "Yes" : "No",
+        "Alcohol": k.alcohol ? "Yes" : "No",
+        "Chronic Disease": k.chronic_disease ? "Yes" : "No",
+        "Hypertension": k.prevalent_hypertension ? "Yes" : "No",
+        "Stroke History": k.prevalent_stroke ? "Yes" : "No"
       });
 
       renderImages(images);
@@ -221,7 +284,9 @@
       const container = document.getElementById(containerId);
       container.innerHTML = "";
       for (let key in obj) {
-        container.innerHTML += `<div class="item"><strong>${key}:</strong> ${obj[key] ?? "-"}</div>`;
+        // null veya undefined ise "-" koy
+        const val = (obj[key] !== null && obj[key] !== undefined) ? obj[key] : "-";
+        container.innerHTML += `<div class="item"><strong>${key}</strong> <span>${val}</span></div>`;
       }
     }
 
@@ -230,7 +295,7 @@
       row.innerHTML = "";
 
       if (list.length === 0) {
-        row.innerHTML = "<p>No images uploaded.</p>";
+        row.innerHTML = "<p style='color:#666; padding:10px;'>No medical images uploaded.</p>";
         return;
       }
 
@@ -242,24 +307,40 @@
     // ASK
     document.getElementById("askBtn").onclick = async () => {
       const q = document.getElementById("askInput").value;
+      if(!q) return; 
+
+      const btn = document.getElementById("askBtn");
+      btn.textContent = "Thinking...";
+      
       const res = await fetch("/api/ask", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ patient_id: Number(patientId), question: q })
       });
       const data = await res.json();
-      document.getElementById("askResult").textContent = data.answer;
+      
+      const resultBox = document.getElementById("askResult");
+      resultBox.style.display = "block";
+      resultBox.textContent = data.answer;
+      btn.textContent = "Ask AI Assistant";
     };
 
     // REPORT
     document.getElementById("reportBtn").onclick = async () => {
+      const btn = document.getElementById("reportBtn");
+      btn.textContent = "Generating Report...";
+      
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ patient_id: Number(patientId) })
       });
       const data = await res.json();
-      document.getElementById("reportOutput").textContent = JSON.stringify(data, null, 2);
+      
+      const outputBox = document.getElementById("reportOutput");
+      outputBox.style.display = "block";
+      outputBox.textContent = JSON.stringify(data, null, 2);
+      btn.textContent = "Generate Full Report";
     };
 
     loadPatient();
