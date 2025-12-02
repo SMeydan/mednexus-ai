@@ -1,0 +1,5 @@
+sqlachemy
+fastapi
+pydantic
+uvicorn
+sqlite3
