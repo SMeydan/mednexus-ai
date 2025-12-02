@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedNexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="imgs/ai-brain.png" type="image/png">
+    <script src="/static/components/header.js" type="module"></script>
+    <script src="/static/components/footer.js" type="module"></script>
+
+    <style>
+        .slider-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            will-change: transform;
+        }
+
+        .card {
+            min-width: 250px;
+            border-radius: 12px;
+            padding: 20px;
+            background: linear-gradient(90deg, #00aaff, #8660ba);
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #0f2a44 0%, #102b3f 100%);
+            color: #fff;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 60px 80px;
+            background: radial-gradient(circle at top right, #502a8e, #01020a);
+            box-sizing: border-box;
+            min-height: 420px;
+        }
+
+        .hero>div:first-child {
+            flex: 1 1 60%;
+            min-width: 280px;
+            height: 380px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .hero-img {
+            flex: 0 0 420px;
+            width: 380px;
+            height: 380px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Küçük ekranlarda üst üste gelsin */
+        @media (max-width: 860px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 36px 20px;
+                min-height: auto;
+            }
+
+            .hero>div:first-child {
+                order: 1;
+            }
+
+            .hero-img {
+                order: 2;
+                flex: 0 0 320px;
+                width: 320px;
+                height: 320px;
+                margin-top: 20px;
+            }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #ceefff;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-image: linear-gradient(#211f30, #211f30),
+                linear-gradient(90deg, #00aaff, #8660ba);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            color: #fff;
+            background-image: linear-gradient(90deg, #00aaff, #8660ba);
+            box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .info-section {
+            background: radial-gradient(circle at top right, #351c61, #01020a);
+            padding: 60px 0;
+            overflow: hidden;
+            height: 35vh;
+        }
+
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            will-change: transform;
+        }
+
+        .card {
+            position: relative;
+            background-color: transparent;
+            margin-right: 30px;
+            color: #dedcdc;
+            font-weight: 600;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 20px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(209, 233, 252, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .card:hover {
+            color: #fff;
+            background-image: linear-gradient(90deg, #00aaff, #8660ba);
+            box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            color: #ceefff;
+            margin-bottom: 10px;
+        }
+
+        .hero-img {
+            width: 380px;
+            height: 380px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-img img {
+            width: 95%;
+            height: 95%;
+            object-fit: cover;
+            border-radius: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <med-header></med-header>
+
+    <section class="hero">
+        <div>
+            <h1>MedNexus</h1>
+            <p>An intelligent health analysis platform that processes laboratory and patient data through AI models to
+                support clinical decision-making.</p>
+            <div class="btn-group">
+                <a href="/contact" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="/static/imgs/ai-doctor.png" alt="AI and Doctor Collaboration" />
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="card">
+                    <h3>Multi AI Models</h3>
+                    <p>High-accuracy risk analysis for each disease using both laboratory and imaging-based models.</p>
+                </div>
+                <div class="card">
+                    <h3>Real-Time Patient Risk Scores</h3>
+                    <p>Patient data is fed into specialized models to generate personalized disease risk scores
+                        instantly.</p>
+                </div>
+                <div class="card">
+                    <h3>LLM-Powered Clinical Reporting</h3>
+                    <p>Model outputs are processed by an advanced LLM to produce clear and comprehensive reports for
+                        doctors.</p>
+                </div>
+                <div class="card">
+                    <h3>Personalized Insights & Recommendations</h3>
+                    <p>Receive actionable health insights and lifestyle suggestions based on your individual risk
+                        profile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <med-footer></med-footer>
+    <script>
+        // Sürekli, kesintisiz ve sabit hızda sola kayan slider
+        const slider = document.querySelector('.slider');
+        // öğeleri iki kez kopyala (seamless loop için)
+        slider.innerHTML += slider.innerHTML;
+
+        // transition CSS'si animasyona müdahale edebileceği için kapat
+        slider.style.transition = 'none';
+
+        const contentWidth = slider.scrollWidth / 2; // orijinal içerik genişliği
+        let position = 0;
+        const speed = 120; // px / second
+        let lastTime = performance.now();
+
+        function animateSlider(time) {
+            const delta = (time - lastTime) / 1000;
+            lastTime = time;
+
+            position -= speed * delta;
+
+            // position negatife gittiği için -position ile kontrol et
+            if (-position >= contentWidth) {
+                // bir kopyalık mesafe ileri alarak seamless wrap yap
+                position += contentWidth;
+            }
+
+            slider.style.transform = `translateX(${position}px)`;
+            requestAnimationFrame(animateSlider);
+        }
+
+        requestAnimationFrame(animateSlider);
+    </script>
+
+</body>
+
+</html>

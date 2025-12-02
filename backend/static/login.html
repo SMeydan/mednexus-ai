@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login - MedNexus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="imgs/ai-brain.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="/static/components/header.js" type="module"></script>
+    <script src="/static/components/footer.js" type="module"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      background: radial-gradient(circle at top right, #502a8e, #01020a);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content:space-between;
+    }
+
+    .login-container {
+      background: rgba(209, 233, 252, 0.08);
+      border-radius: 12px;
+      padding: 4rem 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      margin: auto;                 /* yatay ve dikey ortalama */
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.15);
+      border: 1px solid rgba(0, 170, 255, 0.2);
+      text-align: center;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .login-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(90deg, #00aaff, #8660ba, #00aaff);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderGlow 6s linear infinite;
+    pointer-events: none; /* 👈 bu satırı ekle */
+}
+
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      background: #b6e7ff;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: #cfd8e3;
+      font-size: 0.95rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid rgba(0, 170, 255, 0.3);
+      border-radius: 6px;
+      background-color: #331b5d00;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #00aaff;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 170, 255, 0.5);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(134, 96, 186, 0.4);
+    }
+
+    .message {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #ff6b6b;
+      display: none;
+    }
+
+    .success {
+      color: #00ffae;
+    }
+
+  </style>
+</head>
+<body>
+  <med-header></med-header>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" required placeholder="Enter username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="Enter password">
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <div class="message" id="message"></div>
+  </div>
+
+  <med-footer></med-footer>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (username === "doctor" && password === "doctor123") {
+        message.textContent = "Login Successful, Redirecting...";
+        message.classList.add("success");
+        message.style.display = "block";
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userName', 'doctor');
+        setTimeout(() => {
+          window.location.href = "/home"; // yönlendirme sayfası
+        }, 200);
+      } else {
+        message.textContent = "❌ Invalid username or password.";
+        message.classList.remove("success");
+        message.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

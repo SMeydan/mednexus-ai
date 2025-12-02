@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us - MedNexus</title>
+  <link rel="icon" href="imgs/ai-brain.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="/static/components/header.js" type="module"></script>
+  <script src="/static/components/footer.js" type="module"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, #502a8e, #01020a);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 80px auto;
+      background: rgba(209, 233, 252, 0.08);
+      border-radius: 12px;
+      padding: 4rem 2.5rem;
+      /* yatay ve dikey ortalama */
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.15);
+      border: 1px solid rgba(0, 170, 255, 0.2);
+      text-align: center;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      background: linear-gradient(90deg, #ceefff, #8660ba);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #b3c0d4;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: 1px solid rgba(219, 193, 255, 0.3);
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 15px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #00aaff;
+      box-shadow: 0 0 8px rgba(0, 170, 255, 0.4);
+    }
+
+    .btn-outline {
+      width: 100%;
+      margin-top: 30px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #d7f2ff;
+      background-color: transparent;
+      border: 2px solid transparent;
+      cursor: pointer;
+      background-image: linear-gradient(90deg, #00aaff, #8660ba),
+        linear-gradient(90deg, #00aaff, #8660ba);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      color: #fff;
+      background-image: linear-gradient(90deg, #00aaff, #8660ba);
+      box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .info {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 15px;
+      color: #b3c0d4;
+      line-height: 1.8;
+    }
+
+    .info a {
+      color: #00aaff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .info a:hover {
+      color: #8660ba;
+    }
+
+    .success-box {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      background: #28a745;
+      color: white;
+    }
+
+    button{
+      margin-top: 15px;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      color: white;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <med-header></med-header>
+
+  <div class="container">
+    <div id="successBox" class="success-box">Email Sended ✔</div>
+    <h1>Contact Us</h1>
+    <form id="contactForm">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="info">
+      <p>Email: <a href="mailto:info@mednexus.com">info@mednexus.com</a></p>
+      <p>Phone: <a href="tel:444 0 444">444 0 444</a></p>
+      <p>Address: Defterdar, Otakçılar Cd. No:78, 34055 Eyüpsultan/İstanbul</p>
+    </div>
+  </div>
+
+  <med-footer></med-footer>
+  <script>
+    const form = document.getElementById("contactForm");
+    const successBox = document.getElementById("successBox");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      };
+
+      try {
+        const res = await fetch("/api/mail", {
+          method: "GET",
+        });
+
+        if (res) {
+          successBox.style.display = "block"; 
+          form.reset();
+        } else {
+          alert("Failed: " + data.detail);
+        }
+      } catch (error) {
+        alert("Request failed");
+      }
+    });
+  </script>
+</body>
+
+</html>

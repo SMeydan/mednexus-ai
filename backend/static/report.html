@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedNexus - General Reports</title>
+  <link rel="icon" href="imgs/ai-brain.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0f1f;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-bottom: 0.5px solid #8660ba;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-logout {
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-logout:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
+    }
+
+    .dashboard {
+      padding: 50px 60px;
+    }
+
+    .dashboard h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: #121b36;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 170, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 2px;
+      background: linear-gradient(90deg, #00aaff, #8660ba, #00aaff);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: borderFlow 5s linear infinite;
+    }
+
+    @keyframes borderFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .card h3 {
+      color: #00aaff;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #cfd8e3;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .table-container {
+      background: #0e162b;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 15px;
+    }
+
+    th {
+      background-color: #14213d;
+      color: #00aaff;
+      border-bottom: 1px solid #223b5f;
+    }
+
+    tr:nth-child(even) {
+      background-color: #101830;
+    }
+
+    tr:hover {
+      background-color: #182445;
+    }
+
+    td {
+      color: #dbe3f1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #8892a5;
+      font-size: 0.9rem;
+      border-top: 1px solid #223b5f;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">⚕️ MedNexus Admin</div>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="dashboard">
+    <h1>General Reports</h1>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total Users</h3>
+        <p id="users-count">3,256</p>
+      </div>
+      <div class="card">
+        <h3>AI Diagnoses</h3>
+        <p id="ai-diagnoses">1,128</p>
+      </div>
+      <div class="card">
+        <h3>System Uptime</h3>
+        <p id="uptime">99.98%</p>
+      </div>
+      <div class="card">
+        <h3>Data Accuracy</h3>
+        <p id="accuracy">97.6%</p>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <h3 style="color:#00aaff; margin-bottom:15px;">Recent Analysis Summary</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Patient ID</th>
+            <th>Scan Type</th>
+            <th>Result</th>
+            <th>Confidence</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#PX-2025-023</td>
+            <td>MRI</td>
+            <td>Benign</td>
+            <td>96.4%</td>
+            <td>09 Oct 2025</td>
+          </tr>
+          <tr>
+            <td>#PX-2025-024</td>
+            <td>CT</td>
+            <td>Malignant</td>
+            <td>92.1%</td>
+            <td>09 Oct 2025</td>
+          </tr>
+          <tr>
+            <td>#PX-2025-025</td>
+            <td>X-Ray</td>
+            <td>Normal</td>
+            <td>98.7%</td>
+            <td>08 Oct 2025</td>
+          </tr>
+          <tr>
+            <td>#PX-2025-026</td>
+            <td>Ultrasound</td>
+            <td>Inconclusive</td>
+            <td>88.5%</td>
+            <td>08 Oct 2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 MedNexus — General Analytics Dashboard
+  </footer>
+
+  <script>
+    function logout() {
+      alert("You have been logged out.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

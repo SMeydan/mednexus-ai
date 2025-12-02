@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MedNexus Patients</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="imgs/ai-brain.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="/static/components/header.js" type="module"></script>
+  <script src="/static/components/footer.js" type="module"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, #502a8e, #01020a);
+      color: #fff;
+    }
+
+    .page-container {
+      padding: 60px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      background: linear-gradient(90deg, #d3f0ff, #8660ba);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #351d5c;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 15px rgba(0, 170, 255, 0.1);
+    }
+
+    .filter-bar input {
+      width: 300px;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 170, 255, 0.3);
+      background: #331d58;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .btn-outline {
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      border-radius: 8px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 0 10px rgba(134, 96, 186, 0.5);
+      transition: 0.3s;
+    }
+
+    .btn-outline:hover {
+      transform: translateY(-2px);
+    }
+
+    .data-box {
+      background: #3c206c;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+    }
+
+    th {
+      background-color: #351d5c;
+      color: #c9ecff;
+      border-bottom: 1px solid #223b5f;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #3d226d;
+    }
+
+    tr:hover {
+      background-color: #201845;
+      transition: background 0.2s ease;
+    }
+
+    .view-btn {
+      padding: 6px 16px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(134, 96, 186, 0.4);
+    }
+
+    .view-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(134, 96, 186, 0.8);
+    }
+
+
+
+    /* ------------------- MODAL ------------------- */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(3px);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: #351d5c;
+      padding: 30px;
+      border-radius: 12px;
+      width: 450px;
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+      animation: fadeIn .2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #d3f0ff, #8660ba);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .modal-content label {
+      display: block;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      width: 100%;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 170, 255, 0.3);
+      background: #2b174a;
+      color: #fff;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn-cancel {
+      padding: 8px 18px;
+      background: #777;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-save {
+      padding: 8px 18px;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <med-header></med-header>
+
+  <div class="page-container">
+    <h1>Patient List</h1>
+
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="Search by name or ID">
+      <button class="btn-outline" id="openAddModal">Add New Patient</button>
+    </div>
+
+    <div class="data-box">
+      <table id="patientTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>National ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Complaint</th>
+            <th>Date</th>
+            <th>Edit</th>
+            <th>Add Details</th>
+            <th>View</th>
+            <th>AI Report</th>
+            <th>Chat</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <med-footer></med-footer>
+
+
+  <!-- ---------------- MODAL ---------------- -->
+  <div id="patientModal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Patient</h2>
+
+      <label>Full Name</label>
+      <input type="text" id="modalName">
+
+      <label>National ID</label>
+      <input type="text" id="modalNational">
+
+      <label>Age</label>
+      <input type="number" id="modalAge">
+
+      <label>Gender</label>
+      <select id="modalGender">
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label>Complaint</label>
+      <textarea id="modalComplaint"></textarea>
+
+      <div class="modal-actions">
+        <button id="modalCancel" class="btn-cancel">Cancel</button>
+        <button id="modalSave" class="btn-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KNOWLEDGE MODAL -->
+  <div id="knowledgeModal" class="modal">
+    <div class="modal-content">
+      <h2>Add Patient Knowledge</h2>
+
+      <label>Glucose</label>
+      <input type="number" id="k_glucose">
+
+      <label>BMI</label>
+      <input type="number" id="k_bmi">
+
+      <label>Diabetes</label>
+      <select id="k_diabetes">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>Heart Disease</label>
+      <select id="k_heart">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>HbA1c</label>
+      <input type="number" id="k_hba1c">
+
+      <label>Smoking</label>
+      <select id="k_smoking">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>Cigarettes Per Day</label>
+      <input type="number" id="k_cigs">
+
+      <label>Physical Activity</label>
+      <select id="k_activity">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>Stress</label>
+      <select id="k_stress">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>Alcohol</label>
+      <select id="k_alcohol">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>Chronic Disease</label>
+      <select id="k_chronic">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>Prevalent Hypertension</label>
+      <select id="k_hypertension">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <label>Prevalent Stroke</label>
+      <select id="k_stroke">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+
+      <div class="modal-actions">
+        <button id="k_cancel" class="btn-cancel">Cancel</button>
+        <button id="k_save" class="btn-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- -------------- JAVASCRIPT -------------- -->
+  <script>
+
+    let editingId = null;
+
+    const modal = document.getElementById("patientModal");
+    const modalTitle = document.getElementById("modalTitle");
+
+    const nameInput = document.getElementById("modalName");
+    const natInput = document.getElementById("modalNational");
+    const ageInput = document.getElementById("modalAge");
+    const genderInput = document.getElementById("modalGender");
+    const complaintInput = document.getElementById("modalComplaint");
+
+    const tableBody = document.getElementById("tableBody");
+
+    document.getElementById("openAddModal").onclick = () => openAddModal();
+    document.getElementById("modalCancel").onclick = () => modal.style.display = "none";
+
+
+    function openAddModal() {
+      editingId = null;
+      modalTitle.textContent = "Add New Patient";
+
+      nameInput.value = "";
+      natInput.value = "";
+      ageInput.value = "";
+      genderInput.value = "Female";
+      complaintInput.value = "";
+
+      modal.style.display = "flex";
+    }
+
+    function openEditModal(patient) {
+      editingId = patient.id;
+      modalTitle.textContent = "Edit Patient";
+
+      nameInput.value = patient.full_name;
+      natInput.value = patient.national_id;
+      ageInput.value = patient.age;
+      genderInput.value = patient.gender;
+      complaintInput.value = patient.complaint;
+
+      modal.style.display = "flex";
+    }
+
+    document.getElementById("modalSave").onclick = async () => {
+      const payload = {
+        full_name: nameInput.value,
+        national_id: natInput.value,
+        age: Number(ageInput.value),
+        gender: genderInput.value,
+        complaint: complaintInput.value
+      };
+
+      if (!editingId) {
+        await fetch("/api/create-patient", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        await fetch(`/api/update-patient/${editingId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      modal.style.display = "none";
+      loadPatients();
+    };
+
+
+
+    async function loadPatients() {
+      const res = await fetch("/api/patient-list");
+      const patients = await res.json();
+
+      tableBody.innerHTML = "";
+
+      patients.forEach(p => {
+
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${p.id}</td>
+          <td>${p.national_id}</td>
+          <td>${p.full_name}</td>
+          <td>${p.age ?? "-"}</td>
+          <td>${p.gender}</td>
+          <td>${p.complaint ?? "-"}</td>
+          <td>${new Date(p.created_at).toLocaleDateString()}</td>
+          <td><button class="view-btn edit-btn" data-id="${p.id}">Edit</button></td>
+          <td><button class="view-btn knowledge-btn" data-id="${p.id}">Add Knowledge</button></td>
+          <td><a class="view-btn" href="/detail/${p.id}">View</a></td>
+           <td><a class="view-btn" href="/patient/${p.id}">Create Report with AI</a></td>
+           <td><a class="view-btn" href="/patient/${p.id}">Chat About Patient</a></td>
+        `;
+
+        tableBody.appendChild(tr);
+      });
+
+      document.querySelectorAll(".edit-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const patient = patients.find(x => x.id == btn.dataset.id);
+          openEditModal(patient);
+        });
+      });
+
+      document.querySelectorAll(".knowledge-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          openKnowledgeModal(btn.dataset.id);
+        });
+      });
+    }
+
+
+
+    // Search
+    document.getElementById("searchInput").addEventListener("input", () => {
+      const val = searchInput.value.toLowerCase();
+      [...tableBody.children].forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(val) ? "" : "none";
+      });
+    });
+
+    loadPatients();
+
+    let knowledgePatientId = null;
+    const knowledgeModal = document.getElementById("knowledgeModal");
+
+    document.getElementById("k_cancel").onclick = () => {
+      knowledgeModal.style.display = "none";
+    };
+
+    function openKnowledgeModal(patientId) {
+      knowledgePatientId = patientId;
+      knowledgeModal.style.display = "flex";
+    }
+
+    document.getElementById("k_save").onclick = async () => {
+      const payload = {
+        glucose: Number(document.getElementById("k_glucose").value) || null,
+        bmi: Number(document.getElementById("k_bmi").value) || null,
+        diabetes: document.getElementById("k_diabetes").value === "true",
+        heart_disease: document.getElementById("k_heart").value === "true",
+        hba1c: Number(document.getElementById("k_hba1c").value) || null,
+        smoking: document.getElementById("k_smoking").value === "true",
+        cigarettes_per_day: Number(document.getElementById("k_cigs").value) || null,
+        physical_activity: document.getElementById("k_activity").value === "true",
+        stress: document.getElementById("k_stress").value === "true",
+        alcohol: document.getElementById("k_alcohol").value === "true",
+        chronic_disease: document.getElementById("k_chronic").value === "true",
+        prevalent_hypertension: document.getElementById("k_hypertension").value === "true",
+        prevalent_stroke: document.getElementById("k_stroke").value === "true"
+      };
+
+      await fetch(`/api/patient/${knowledgePatientId}/knowledge`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      knowledgeModal.style.display = "none";
+    };
+
+
+  </script>
+
+</body>
+
+</html>

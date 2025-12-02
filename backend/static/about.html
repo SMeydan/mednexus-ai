@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Our Team — MedNexus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="imgs/ai-brain.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="/static/components/header.js" type="module"></script>
+    <script src="/static/components/footer.js" type="module"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #502a8e, #01020a);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #00aaff;
+            font-weight: 600;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-image: linear-gradient(#0a0f1f, #0a0f1f),
+                linear-gradient(90deg, #00aaff, #8660ba);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .btn-outline:hover {
+            color: #fff;
+            background-image: linear-gradient(90deg, #00aaff, #8660ba);
+            box-shadow: 0 0 15px rgba(134, 96, 186, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 80px;
+            text-align: center;
+        }
+
+        .section h1 {
+            font-size: 2.5rem;
+            color: #d3f0ff;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .member {
+            background: rgba(255, 255, 255, 0.033);
+            padding: 40px 25px;
+            border-radius: 16px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .member::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(90deg, #00aaff, #8660ba, #00aaff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlow 4s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.3);
+        }
+
+        .member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #00aaff;
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(134, 96, 186, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+            }
+        }
+
+        .member h3 {
+            color: #d3f0ff;
+            margin: 15px 0 8px;
+            font-size: 1.2rem;
+        }
+
+        .member p {
+            color: #cfd8e3;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 900px) {
+            .section {
+                padding: 40px 30px;
+            }
+
+            .team {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <med-header></med-header>
+    <section class="section">
+        <h1>Our Team</h1>
+        <div class="team">
+            <div class="member">
+                <img src="/static/imgs/Sudenur.jpg" alt="Sudenur Meydan">
+                <h3>Sudenur Meydan</h3>
+            </div>
+            <div class="member">
+                <img src="/static/imgs/Neslihan.jpg" alt="Sudenur Meydan">
+                <h3>Neslihan Doğan</h3>
+            </div>
+            <div class="member">
+                <img src="/static/imgs/Esra.jpg" alt="Sudenur Meydan">
+                <h3>Esra Kazak</h3>
+            </div>
+            <div class="member">
+                <img src="/static/imgs/Halil.jpg" alt="Sudenur Meydan">
+                <h3>Halil İbrahim Kurnaz</h3>
+            </div>
+            <div class="member">
+                <img src="/static/imgs/Umut.jpg" alt="Sudenur Meydan">
+                <h3>Umut Yağız Yerli</h3>
+            </div>
+            <div class="member">
+                <img src="/static/imgs/Enes.jpg" alt="Sudenur Meydan">
+                <h3>Enes Salih Gökçek</h3>
+            </div>
+    </section>
+    <med-footer></med-footer>
+</body>
+
+</html>

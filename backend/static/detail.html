@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Details – MedNexus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="/static/components/header.js" type="module"></script>
+  <script src="/static/components/footer.js" type="module"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, #502a8e, #01020a);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #d3f0ff, #8660ba);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section {
+      background: rgba(53, 29, 92, 0.75);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 16px;
+      margin-top: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.12);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #d3f0ff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .item {
+      background: #2b184c;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #24153d;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      resize: vertical;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #00aaff, #8660ba);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+      box-shadow: 0 0 12px rgba(134, 96, 186, 0.5);
+      transition: 0.2s;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    pre {
+      background: #1f1235;
+      padding: 18px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .back-btn {
+      margin-top: 25px;
+      display: inline-block;
+      cursor: pointer;
+      color: #76cef9;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    /* IMAGES */
+    .images-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-top: 8px;
+    }
+
+    .img-box {
+      width: 180px;
+      height: 130px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 850px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <med-header></med-header>
+
+  <div class="container">
+    <h1>Patient Details</h1>
+
+    <!-- Patient Info -->
+    <div class="section">
+      <div class="section-title">General Information</div>
+      <div id="patientInfo" class="grid"></div>
+    </div>
+
+    <!-- Knowledge -->
+    <div class="section">
+      <div class="section-title">Medical Knowledge</div>
+      <div id="knowledgeInfo" class="grid"></div>
+    </div>
+
+    <!-- IMAGES -->
+    <div class="section">
+      <div class="section-title">Uploaded Medical Images</div>
+      <div id="imagesRow" class="images-row"></div>
+    </div>
+
+    <!-- ASK AI -->
+    <div class="section">
+      <div class="section-title">Ask MedNexus AI</div>
+      <textarea id="askInput" placeholder="Ask anything about this patient..."></textarea>
+      <button class="btn" id="askBtn">Ask AI</button>
+      <pre id="askResult"></pre>
+    </div>
+
+    <!-- REPORT -->
+    <div class="section">
+      <div class="section-title">AI Medical Analysis Report</div>
+      <button class="btn" id="reportBtn">Generate Report</button>
+      <pre id="reportOutput"></pre>
+    </div>
+
+    <div class="back-btn" onclick="location.href='/home.html'">← Back to Patient List</div>
+  </div>
+
+  <med-footer></med-footer>
+
+  <script>
+    const patientId = window.location.pathname.split("/").pop();
+
+    async function loadPatient() {
+      const res = await fetch(`/api/patient/${patientId}`);
+      const data = await res.json();
+
+      const p = data.patient;
+      const k = data.knowledge || {};
+      const images = data.images || [];
+
+      render("patientInfo", {
+        "Full Name": p.full_name,
+        "National ID": p.national_id,
+        "Age": p.age,
+        "Gender": p.gender,
+        "Complaint": p.complaint,
+        "Created At": new Date(p.created_at).toLocaleString()
+      });
+
+      render("knowledgeInfo", {
+        "Glucose": k.glucose,
+        "BMI": k.bmi,
+        "HbA1c": k.hba1c,
+        "Cholesterol": k.total_cholesterol,
+        "Diabetes": k.diabetes,
+        "Heart Disease": k.heart_disease,
+        "Smoking": k.smoking,
+        "Cigarettes/day": k.cigarettes_per_day,
+        "Physical Activity": k.physical_activity,
+        "Stress": k.stress,
+        "Alcohol": k.alcohol,
+        "Chronic Disease": k.chronic_disease,
+        "Hypertension": k.prevalent_hypertension,
+        "Stroke History": k.prevalent_stroke
+      });
+
+      renderImages(images);
+    }
+
+    function render(containerId, obj) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+      for (let key in obj) {
+        container.innerHTML += `<div class="item"><strong>${key}:</strong> ${obj[key] ?? "-"}</div>`;
+      }
+    }
+
+    function renderImages(list) {
+      const row = document.getElementById("imagesRow");
+      row.innerHTML = "";
+
+      if (list.length === 0) {
+        row.innerHTML = "<p>No images uploaded.</p>";
+        return;
+      }
+
+      list.forEach(url => {
+        row.innerHTML += `<img src="${url}" class="img-box" />`;
+      });
+    }
+
+    // ASK
+    document.getElementById("askBtn").onclick = async () => {
+      const q = document.getElementById("askInput").value;
+      const res = await fetch("/api/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ patient_id: Number(patientId), question: q })
+      });
+      const data = await res.json();
+      document.getElementById("askResult").textContent = data.answer;
+    };
+
+    // REPORT
+    document.getElementById("reportBtn").onclick = async () => {
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ patient_id: Number(patientId) })
+      });
+      const data = await res.json();
+      document.getElementById("reportOutput").textContent = JSON.stringify(data, null, 2);
+    };
+
+    loadPatient();
+  </script>
+
+</body>
+</html>
