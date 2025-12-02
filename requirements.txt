@@ -2,4 +2,4 @@ SQLAlchemy==2.0.44
 fastapi==0.95.2
 pydantic==2.4.2
 uvicorn==0.22.0
-sqlite3==0.0.1
+db-sqlite3==0.0.1
