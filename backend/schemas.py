@@ -195,3 +195,83 @@ class AskRequest(BaseModel):
 
 class AnalyzeRequest(BaseModel):
     patient_id: int
+
+from pydantic import BaseModel
+from typing import Optional, List
+
+
+class ReportCreate(BaseModel):
+    patient_id: int
+
+
+class ReportPatient(BaseModel):
+    id: int
+    national_id: str
+    full_name: str
+    complaint: Optional[str] = None
+    age: Optional[int] = None
+    gender: Optional[str] = None
+
+    model_config = {"from_attributes": True}
+
+
+class ReportKnowledge(BaseModel):
+    glucose: Optional[float] = None
+    diabetes: Optional[bool] = None
+    heart_disease: Optional[bool] = None
+    bmi: Optional[float] = None
+    hba1c: Optional[float] = None
+    smoking: Optional[bool] = None
+    cigarettes_per_day: Optional[int] = None
+    physical_activity: Optional[bool] = None
+    stress: Optional[bool] = None
+    alcohol: Optional[bool] = None
+    chronic_disease: Optional[bool] = None
+    total_cholesterol: Optional[float] = None
+    prevalent_hypertension: Optional[bool] = None
+    prevalent_stroke: Optional[bool] = None
+
+    model_config = {"from_attributes": True}
+
+
+class ReportHeart(BaseModel):
+    bp_meds: Optional[bool] = None
+    diastolic_bp: Optional[int] = None
+    systolic_bp: Optional[int] = None
+    heart_rate: Optional[int] = None
+    chest_pain: Optional[str] = None
+    resting_ecg: Optional[str] = None
+    exercise_slope: Optional[str] = None
+
+    model_config = {"from_attributes": True}
+
+
+class ReportImage(BaseModel):
+    id: int
+    image_path: str
+    disease: Optional[str] = None
+
+    model_config = {"from_attributes": True}
+
+
+class ReportResult(BaseModel):
+    diabetes_risk: Optional[float] = None
+    hypertension_risk: Optional[float] = None
+    heart_disease_risk: Optional[float] = None
+
+    diabetes_diagnosis: Optional[str] = None
+    hypertension_diagnosis: Optional[str] = None
+    heart_disease_diagnosis: Optional[str] = None
+
+    source: Optional[str] = None
+    result: Optional[str] = None  # uzun text summary
+
+    model_config = {"from_attributes": True}
+
+
+class ReportResponse(BaseModel):
+    patient: ReportPatient
+    knowledge: Optional[ReportKnowledge] = None
+    heart: Optional[ReportHeart] = None
+    images: List[ReportImage] = []
+    result: Optional[ReportResult] = None

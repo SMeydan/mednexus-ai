@@ -104,21 +104,19 @@ class PatientImage(Base):
 
 class Result(Base):
     __tablename__ = "result"
-
     id = Column(Integer, primary_key=True, index=True)
-    patient_id = Column(Integer, ForeignKey("patients.id", ondelete="CASCADE"), nullable=False)
+    patient_id = Column(Integer, ForeignKey("patients.id", ondelete="CASCADE"))
 
-    diabetes_risk = Column(Float, nullable=True)
-    hypertension_risk = Column(Float, nullable=True)
-    heart_disease_risk = Column(Float, nullable=True)
+    diabetes_risk = Column(Float)
+    hypertension_risk = Column(Float)
+    heart_disease_risk = Column(Float)
 
-    diabetes_diagnosis = Column(String(30), nullable=True)
-    hypertension_diagnosis = Column(String(30), nullable=True)
-    heart_disease_diagnosis = Column(String(30), nullable=True)
+    diabetes_diagnosis = Column(String(30))
+    hypertension_diagnosis = Column(String(30))
+    heart_disease_diagnosis = Column(String(30))
 
-    source = Column(String(300), nullable=True)
-    result = Column(Text, nullable=True)
+    source = Column(String(300))
+    result = Column(Text)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-
     patient = relationship("Patient", back_populates="results")

@@ -11,7 +11,10 @@ from .models import Base
 from . import patients as patient_crud
 from . import reports as report_crud
 from . import schemas
+from fastapi.staticfiles import StaticFiles
 
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
 
 app = FastAPI(
     title="MedNexus",
@@ -19,11 +22,8 @@ app = FastAPI(
     description="MedNexus patient & AI analysis backend",
 )
 
-# --- DB init ---
 Base.metadata.create_all(bind=engine)
 
-
-# --- DB dependency ---
 def get_db():
     db = SessionLocal()
     try:
@@ -31,13 +31,6 @@ def get_db():
     finally:
         db.close()
 
-
-# --- Static files / HTML pages ---
-
-BASE_DIR = Path(__file__).resolve().parent
-STATIC_DIR = BASE_DIR / "static"
-
-from fastapi.staticfiles import StaticFiles
 
 class CustomStaticFiles(StaticFiles):
     def is_corrupted(self, path):
@@ -102,23 +95,16 @@ def page_report():
 def page_home():
     return serve_html("home.html")
 
+
+
 @app.get("/detail/{patient_id}", response_class=HTMLResponse)
 @app.get("/detail.html/{patient_id}", response_class=HTMLResponse)
 def page_detail(patient_id: int):
     return serve_html("detail.html")
 
-
-
-# -------------------------------------------------------------------
-# API endpoints (prefix /api)
-# -------------------------------------------------------------------
-
-# --- Patient CRUD ---
-
 @app.get("/api/patient-list", response_model=list[schemas.PatientResponse])
 def patient_list(db: Session = Depends(get_db)):
     return patient_crud.get_patients(db)
-
 
 @app.get("/api/patient/{patient_id}")
 def patient_detail(patient_id: int, db: Session = Depends(get_db)):
@@ -126,7 +112,6 @@ def patient_detail(patient_id: int, db: Session = Depends(get_db)):
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
     return patient
-
 
 @app.post("/api/create-patient", response_model=schemas.PatientCreate)
 def create_patient(req: schemas.PatientCreate, db: Session = Depends(get_db)):
@@ -143,7 +128,6 @@ def update_patient(patient_id: int, req: schemas.PatientUpdate, db: Session = De
         raise HTTPException(status_code=404, detail="Patient not found")
     return updated
 
-
 @app.delete("/api/delete-patient/{patient_id}")
 def delete_patient(patient_id: int, db: Session = Depends(get_db)):
     deleted = patient_crud.soft_delete_patient(db, patient_id)
@@ -151,26 +135,17 @@ def delete_patient(patient_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Patient not found")
     return {"message": "Patient deleted"}
 
-
-# --- Result / Report CRUD (result tablosu) ---
-
 @app.get("/api/patient/{patient_id}/reports", response_model=list[schemas.ReportResponse])
 def patient_reports(patient_id: int, db: Session = Depends(get_db)):
     return report_crud.get_reports_by_patient(db, patient_id)
-
 
 @app.post("/api/report", response_model=schemas.ReportResponse)
 def create_report(req: schemas.ReportCreate, db: Session = Depends(get_db)):
     return report_crud.create_report(db, req)
 
-
-@app.put("/api/report/{report_id}", response_model=schemas.ReportResponse)
-def update_report(report_id: int, req: schemas.ReportUpdate, db: Session = Depends(get_db)):
-    updated = report_crud.update_report(db, report_id, req)
-    if not updated:
-        raise HTTPException(status_code=404, detail="Report not found")
-    return updated
-
+@app.get("/api/report/{report_id}")
+def get_report(report_id: int, db: Session = Depends(get_db)):
+        return report_crud.create_report(db,report_id)
 
 @app.delete("/api/report/{report_id}")
 def delete_report(report_id: int, db: Session = Depends(get_db)):
@@ -179,23 +154,12 @@ def delete_report(report_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Report not found")
     return {"message": "Report deleted"}
 
-@app.post("/api/contact")
-async def contact(request: str):
-    return {"message": "Contact form submitted"}
 
 
-@app.post("/api/login")
-async def login(username: str, password: str):
-    if username == "admin" and password == "password":
-        return {"message": "Login successful"}
-    raise HTTPException(status_code=401, detail="Invalid credentials")
-
-@app.get("/api/mail")
-async def get_mail():
-    return "Email Sended"
 
 
-# --- Ask & Analyze ---
+
+
 
 @app.post("/api/ask")
 async def ask(req: schemas.AskRequest, db: Session = Depends(get_db)):
@@ -205,14 +169,12 @@ async def ask(req: schemas.AskRequest, db: Session = Depends(get_db)):
     # Şimdilik dummy cevap
     return {"answer": "Bu soruya şu an cevap veremiyorum."}
 
-
 @app.post("/api/analyze")
 async def analyze(req: schemas.AnalyzeRequest, db: Session = Depends(get_db)):
     reports = report_crud.get_reports_by_patient(db, req.patient_id)
     if not reports:
         raise HTTPException(status_code=404, detail="No reports for this patient")
 
-    # Şimdilik dummy analiz
     return {
         "patient_id": req.patient_id,
         "diabetes": 14.2,
