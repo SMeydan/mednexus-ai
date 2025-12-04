@@ -386,17 +386,17 @@ summaryBox.innerHTML = summaryHtml;
   document.getElementById("riskSection").innerHTML = `
     <div class="risk-box ${getRiskClass(r.diabetes_diagnosis)}">
         <span class="risk-label">Diabetes Risk</span>
-        <span class="risk-percent">${(r.diabetes_risk * 100).toFixed(0)}%</span>
+        <span class="risk-percent">${(r.diabetes_risk * 100).toFixed(4)}%</span>
         <span class="risk-diag">${r.diabetes_diagnosis}</span>
     </div>
     <div class="risk-box ${getRiskClass(r.hypertension_diagnosis)}">
         <span class="risk-label">Hypertension Risk</span>
-        <span class="risk-percent">${(r.hypertension_risk * 100).toFixed(0)}%</span>
+        <span class="risk-percent">${(r.hypertension_risk * 100).toFixed(4)}%</span>
         <span class="risk-diag">${r.hypertension_diagnosis}</span>
     </div>
     <div class="risk-box ${getRiskClass(r.heart_disease_diagnosis)}">
         <span class="risk-label">Heart Disease Risk</span>
-        <span class="risk-percent">${(r.heart_disease_risk * 100).toFixed(0)}%</span>
+        <span class="risk-percent">${(r.heart_disease_risk * 100).toFixed(4)}%</span>
         <span class="risk-diag">${r.heart_disease_diagnosis}</span>
     </div>
   `;

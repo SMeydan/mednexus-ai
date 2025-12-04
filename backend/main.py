@@ -10,6 +10,7 @@ from .database import SessionLocal, engine
 from .models import Base
 from . import patients as patient_crud
 from . import reports as report_crud
+from . import ai as ai_module
 from . import schemas
 from fastapi.staticfiles import StaticFiles
 
@@ -163,12 +164,10 @@ def delete_report(report_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/api/ask")
-async def ask(req: schemas.AskRequest, db: Session = Depends(get_db)):
-    patient = patient_crud.get_patient(db, req.patient_id)
-    if not patient:
-        raise HTTPException(status_code=404, detail="Patient not found")
-    # Şimdilik dummy cevap
-    return {"answer": "Bu soruya şu an cevap veremiyorum."}
+def ask_patient(question: str, patient_id: int, is_doctor: bool = True, db: Session = Depends(get_db)):
+    return ai_module.ask(db, question, patient_id, is_doctor)
+
+
 
 @app.post("/api/analyze")
 async def analyze(req: schemas.AnalyzeRequest, db: Session = Depends(get_db)):
