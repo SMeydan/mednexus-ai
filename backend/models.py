@@ -61,6 +61,7 @@ class PatientKnowledge(Base):
 
     prevalent_hypertension = Column(Boolean, nullable=True)
     prevalent_stroke = Column(Boolean, nullable=True)
+    total_cholesterol = Column(Float, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

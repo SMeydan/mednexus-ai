@@ -215,18 +215,25 @@ class ReportPatient(BaseModel):
     model_config = {"from_attributes": True}
 
 
+
+# ============================================================
+# KNOWLEDGE
+# ============================================================
+
 class ReportKnowledge(BaseModel):
     glucose: Optional[float] = None
     diabetes: Optional[bool] = None
     heart_disease: Optional[bool] = None
     bmi: Optional[float] = None
     hba1c: Optional[float] = None
+
     smoking: Optional[bool] = None
     cigarettes_per_day: Optional[int] = None
     physical_activity: Optional[bool] = None
     stress: Optional[bool] = None
     alcohol: Optional[bool] = None
     chronic_disease: Optional[bool] = None
+
     total_cholesterol: Optional[float] = None
     prevalent_hypertension: Optional[bool] = None
     prevalent_stroke: Optional[bool] = None
@@ -234,11 +241,17 @@ class ReportKnowledge(BaseModel):
     model_config = {"from_attributes": True}
 
 
+
+# ============================================================
+# HEART DISEASE
+# ============================================================
+
 class ReportHeart(BaseModel):
     bp_meds: Optional[bool] = None
     diastolic_bp: Optional[int] = None
     systolic_bp: Optional[int] = None
     heart_rate: Optional[int] = None
+
     chest_pain: Optional[str] = None
     resting_ecg: Optional[str] = None
     exercise_slope: Optional[str] = None
@@ -246,13 +259,24 @@ class ReportHeart(BaseModel):
     model_config = {"from_attributes": True}
 
 
+
+# ============================================================
+# IMAGES
+# ============================================================
+
 class ReportImage(BaseModel):
     id: int
     image_path: str
     disease: Optional[str] = None
+    created_at: Optional[datetime] = None
 
     model_config = {"from_attributes": True}
 
+
+
+# ============================================================
+# RESULT
+# ============================================================
 
 class ReportResult(BaseModel):
     diabetes_risk: Optional[float] = None
@@ -264,10 +288,15 @@ class ReportResult(BaseModel):
     heart_disease_diagnosis: Optional[str] = None
 
     source: Optional[str] = None
-    result: Optional[str] = None  # uzun text summary
+    result: Optional[str] = None
 
     model_config = {"from_attributes": True}
 
+
+
+# ============================================================
+# MAIN RESPONSE
+# ============================================================
 
 class ReportResponse(BaseModel):
     patient: ReportPatient
@@ -275,3 +304,5 @@ class ReportResponse(BaseModel):
     heart: Optional[ReportHeart] = None
     images: List[ReportImage] = []
     result: Optional[ReportResult] = None
+
+    model_config = {"from_attributes": True}

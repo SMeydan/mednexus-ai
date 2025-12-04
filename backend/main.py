@@ -145,7 +145,8 @@ def create_report(req: schemas.ReportCreate, db: Session = Depends(get_db)):
 
 @app.get("/api/report/{report_id}")
 def get_report(report_id: int, db: Session = Depends(get_db)):
-        return report_crud.create_report(db,report_id)
+        a =  report_crud.create_report(db,report_id)
+        return  a
 
 @app.delete("/api/report/{report_id}")
 def delete_report(report_id: int, db: Session = Depends(get_db)):

@@ -169,7 +169,7 @@
 
     <div style="display:flex; gap:10px;">
       <button class="action-btn" onclick="history.back()">← Back</button>
-      <button class="action-btn btn-print" onclick="window.print()">📄 Export PDF</button>
+      <button class="action-btn btn-print" onclick="window.print()">Export PDF</button>
     </div>
   </div>
 
@@ -239,7 +239,6 @@ const icons = {
     alcohol: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/></svg>`
 };
 
-// 📌 **BURASI EKSİKTİ — GERİ EKLEDİM**
 const params = new URLSearchParams(window.location.search);
 const id = params.get("patient_id");
 
@@ -247,7 +246,6 @@ document.getElementById("currentDate").textContent = new Date().toLocaleDateStri
 
 async function loadReport() {
 
-  // 📌 **API artık yine düzgün şekilde id ile çalışacak**
   const res = await fetch(`/api/report/${id}`);
   const data = await res.json();
 
@@ -328,7 +326,52 @@ if (data.images?.length > 0) {
 }
 
   // SUMMARY
-  document.getElementById("summaryText").textContent = data.result.result;
+let summaryBox = document.getElementById("summaryText");
+let rs = data.result;
+
+let visual = {};
+try {
+    visual = JSON.parse(r.result);
+} catch {}
+
+// HTML oluştur
+let summaryHtml = `
+  <div style="margin-bottom:20px;">
+      <strong style="color:#064e3b; font-size:1.1rem;">Diabetes Risk</strong><br>
+      <span style="font-size:1.4rem; font-weight:800;">${(rs.diabetes_risk*100).toFixed(1)}%</span><br>
+      <em style="color:#047857;">${rs.diabetes_diagnosis}</em>
+  </div>
+
+  <div style="margin-bottom:20px;">
+      <strong style="color:#064e3b; font-size:1.1rem;">Hypertension Risk</strong><br>
+      <span style="font-size:1.4rem; font-weight:800;">${(rs.hypertension_risk*100).toFixed(1)}%</span><br>
+      <em style="color:#047857;">${rs.hypertension_diagnosis}</em>
+  </div>
+
+  <div style="margin-bottom:20px;">
+      <strong style="color:#064e3b; font-size:1.1rem;">Heart Disease Risk</strong><br>
+      <span style="font-size:1.4rem; font-weight:800;">${(rs.heart_disease_risk*100).toFixed(1)}%</span><br>
+      <em style="color:#047857;">${rs.heart_disease_diagnosis}</em>
+  </div>
+`;
+
+
+// Visual model çıktılarını ekle
+for (let key in visual) {
+    summaryHtml += `
+        <div style="margin-bottom:20px;">
+            <strong style="color:#064e3b; font-size:1.1rem;">
+                ${key.replace(/_/g," ").toUpperCase()}
+            </strong><br>
+            <span style="font-size:1.4rem; font-weight:800;">
+                ${(visual[key] * 100).toFixed(1)}%
+            </span>
+        </div>
+    `;
+}
+
+summaryBox.innerHTML = summaryHtml;
+
 
   // RISKS
   const r = data.result;
