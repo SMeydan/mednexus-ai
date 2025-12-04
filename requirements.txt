@@ -5,3 +5,4 @@ uvicorn==0.22.0
 db-sqlite3==0.0.1
 psycopg2-binary
 python-dotenv
+numpy
