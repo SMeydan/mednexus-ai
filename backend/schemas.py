@@ -306,3 +306,9 @@ class ReportResponse(BaseModel):
     result: Optional[ReportResult] = None
 
     model_config = {"from_attributes": True}
+
+class AskRequest(BaseModel):
+    question: str
+    patient_id: int
+    is_doctor: bool = True
+

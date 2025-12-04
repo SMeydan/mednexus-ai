@@ -12,6 +12,7 @@ from . import patients as patient_crud
 from . import reports as report_crud
 from . import ai as ai_module
 from . import schemas
+from .schemas import AskRequest
 from fastapi.staticfiles import StaticFiles
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -86,6 +87,11 @@ def page_contact():
 def page_chat():
     return serve_html("chat.html")
 
+@app.get("/chat-patient", response_class=HTMLResponse)
+@app.get("/chat-patient.html", response_class=HTMLResponse)
+def page_chat():
+    return serve_html("chat-patient.html")
+
 @app.get("/report", response_class=HTMLResponse)
 @app.get("/report.html", response_class=HTMLResponse)
 def page_report():
@@ -156,27 +162,11 @@ def delete_report(report_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Report not found")
     return {"message": "Report deleted"}
 
-
-
-
-
-
-
-
 @app.post("/api/ask")
-def ask_patient(question: str, patient_id: int, is_doctor: bool = True, db: Session = Depends(get_db)):
-    return ai_module.ask(db, question, patient_id, is_doctor)
-
-
-
-@app.post("/api/analyze")
-async def analyze(req: schemas.AnalyzeRequest, db: Session = Depends(get_db)):
-    reports = report_crud.get_reports_by_patient(db, req.patient_id)
-    if not reports:
-        raise HTTPException(status_code=404, detail="No reports for this patient")
-
-    return {
-        "patient_id": req.patient_id,
-        "diabetes": 14.2,
-        "etc": "..."
-    }
+def ask_patient(request: AskRequest, db: Session = Depends(get_db)):
+    return ai_module.ask(
+        db=db,
+        question=request.question,
+        patient_id=request.patient_id,
+        is_doctor=request.is_doctor
+    )

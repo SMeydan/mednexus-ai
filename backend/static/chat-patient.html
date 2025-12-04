@@ -18,6 +18,7 @@
       color: #1f2937; /* Yazı rengi koyu gri oldu */
       height: 100vh;
       overflow: hidden;
+
       height: 100vh;
       display: flex; 
       flex-direction: column; 
@@ -192,7 +193,7 @@
       const payload = {
         question: message,
         patient_id: Number(patientId),
-        is_doctor: true
+        is_doctor: false
       };
 
       const response = await fetch("/api/ask", {

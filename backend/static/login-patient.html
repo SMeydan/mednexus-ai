@@ -177,7 +177,7 @@
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userName', 'doctor');
         setTimeout(() => {
-          window.location.href = "/chat"; // yönlendirme sayfası
+          window.location.href = "/chat-patient?patient_id=3"; // yönlendirme sayfası
         }, 800); // Kullanıcı mesajı görsün diye süreyi biraz artırdım
       } else {
         message.textContent = "❌ Invalid username or password.";
