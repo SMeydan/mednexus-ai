@@ -13,8 +13,8 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      /* Arka Plan: Yumuşak Nane Geçişi */
-      background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+      /* index.html renk konseptine uyumlu arka plan */
+      background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
       color: #333;
       min-height: 100vh;
       display: flex;
@@ -29,18 +29,18 @@
       background: #ffffff;
       border-radius: 16px;
       padding: 3.5rem 2.5rem;
-      /* Hafif ve modern gölge */
-      box-shadow: 0 20px 50px rgba(6, 95, 70, 0.06);
-      border: 1px solid rgba(16, 185, 129, 0.1);
-      text-align: left; /* Form elemanları sola yaslı daha iyi durur */
+      /* Hafif ve modern gölge (teal ton) */
+      box-shadow: 0 20px 50px rgba(50,135,146,0.06);
+      border: 1px solid rgba(50,135,146,0.08);
+      text-align: left;
       position: relative;
       box-sizing: border-box;
     }
 
     h1 {
       text-align: center;
-      /* Başlık Rengi: Koyu Yeşil */
-      color: #064e3b;
+      /* Başlık rengi: ana teal */
+      color: #328792;
       font-size: 2.2rem;
       font-weight: 800;
       margin-bottom: 30px;
@@ -54,7 +54,8 @@
       margin-top: 20px;
       margin-bottom: 8px;
       font-weight: 600;
-      color: #374151; /* Koyu Gri */
+      /* Etiket rengi: pasif koyu gri/muted uyumlu */
+      color: #525252;
       font-size: 0.95rem;
     }
 
@@ -75,10 +76,10 @@
     input:focus,
     textarea:focus {
       outline: none;
-      /* Focus Rengi: Zümrüt Yeşili */
-      border-color: #10b981;
+      /* Focus rengi: teal */
+      border-color: #328792;
       background-color: #fff;
-      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 0 0 4px rgba(50,135,146,0.06);
     }
 
     button {
@@ -87,20 +88,20 @@
       padding: 14px;
       border: none;
       border-radius: 10px;
-      /* Buton Gradyanı: Zümrüt Yeşili */
-      background: linear-gradient(135deg, #10b981, #059669);
+      /* Buton gradyanı index ile uyumlu teal */
+      background: linear-gradient(135deg, #5dcbd6, #328792);
       color: white;
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 15px rgba(50,135,146,0.18);
     }
 
     button:hover {
       transform: translateY(-2px);
-      background: linear-gradient(135deg, #34d399, #059669);
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #3ec9d1, #2b6b6b);
+      box-shadow: 0 8px 25px rgba(50,135,146,0.28);
     }
 
     .info {
@@ -118,14 +119,14 @@
     }
 
     .info a {
-      color: #059669; /* Link Rengi: Yeşil */
+      color: #328792; /* Link rengi: ana teal */
       text-decoration: none;
       font-weight: 600;
       transition: color 0.2s;
     }
 
     .info a:hover {
-      color: #047857;
+      color: #256a6a;
       text-decoration: underline;
     }
 
@@ -137,10 +138,10 @@
       border-radius: 10px;
       text-align: center;
       font-weight: 600;
-      /* Başarı renkleri: Açık yeşil zemin, koyu yeşil yazı */
-      background: #d1fae5;
-      color: #065f46;
-      border: 1px solid #a7f3d0;
+      /* Başarı renkleri: çok açık teal zemin, ana teal yazı */
+      background: #e6fbfc;
+      color: #165a56;
+      border: 1px solid rgba(50,135,146,0.12);
       animation: fadeIn 0.5s ease;
     }
 

@@ -13,8 +13,8 @@
       margin: 0;
       font-family: 'Inter', sans-serif;
       height: 100vh;
-      /* Arka Plan: Yumuşak Mint Geçişi */
-      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      /* Arka Plan: index.html ile uyumlu beyaz -> açık teal */
+      background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
       color: #333;
       display: flex;
       flex-direction: column;
@@ -28,22 +28,22 @@
       width: 100%;
       max-width: 420px;
       margin: auto;
-      /* Yeşil tonlu yumuşak gölge */
-      box-shadow: 0 20px 40px rgba(6, 95, 70, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      /* Hafif teal gölge (index ile uyumlu) */
+      box-shadow: 0 20px 50px rgba(50,135,146,0.08);
+      border: 1px solid rgba(50,135,146,0.12);
       text-align: center;
       position: relative;
       box-sizing: border-box;
     }
 
-    /* Animasyonlu Çerçeve - Yeşil/Zümrüt Tonları */
+    /* Animasyonlu Çerçeve - Teal Tonları (index ile uyumlu) */
     .login-container::before {
         content: "";
         position: absolute;
         inset: 0;
         border-radius: 12px;
         padding: 2px;
-        background: linear-gradient(90deg, #6ee7b7, #059669, #6ee7b7);
+        background: linear-gradient(90deg, #5dcbd6, #328792, #5dcbd6);
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
@@ -59,8 +59,8 @@
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
-      /* Başlık Rengi: Koyu Orman Yeşili */
-      color: #064e3b;
+      /* Başlık Rengi: ana teal (index ile uyumlu) */
+      color: #328792;
       font-weight: 800;
       background: none;
       -webkit-text-fill-color: initial;
@@ -74,8 +74,8 @@
     label {
       display: block;
       margin-bottom: 0.4rem;
-      /* Label Rengi: Gri */
-      color: #4b5563;
+      /* Label Rengi: Koyu gri */
+      color: #374151;
       font-size: 0.95rem;
       font-weight: 600;
     }
@@ -94,11 +94,12 @@
     }
 
     input:focus {
-      /* Focus Rengi: Canlı Yeşil */
-      border-color: #10b981;
+      /* Focus Rengi: teal (index ile uyumlu) */
+      border-color: #328792;
       background-color: #ffffff;
       outline: none;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      /* Focus gölgesi teal */
+      box-shadow: 0 0 0 3px rgba(50,135,146,0.12);
     }
     
     input::placeholder {
@@ -110,8 +111,8 @@
       padding: 0.85rem;
       border: none;
       border-radius: 8px;
-      /* Buton: Zümrüt Yeşili Gradyan */
-      background: linear-gradient(90deg, #10b981, #047857);
+      /* Buton: Teal Gradyan (index ile uyumlu) */
+      background: linear-gradient(90deg, #5dcbd6, #328792);
       color: #fff;
       font-weight: 700;
       font-size: 1rem;
@@ -122,7 +123,8 @@
 
     .login-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(4, 120, 87, 0.3);
+      /* Hover gölgesi teal */
+      box-shadow: 0 10px 20px rgba(50,135,146,0.24);
     }
 
     .message {
@@ -134,7 +136,8 @@
     }
 
     .success {
-      color: #059669; /* Başarılı mesajı yeşil */
+      /* Başarılı mesajı teal */
+      color: #328792;
     }
 
   </style>

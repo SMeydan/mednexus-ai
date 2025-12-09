@@ -14,8 +14,8 @@
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
-            /* Nane yeşili (Mint) Gradient Geçişi */
-            background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+            /* Arka plan index.html ile uyumlu: beyazdan teal tonuna geçiş */
+            background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
             color: #333;
         }
 
@@ -27,8 +27,8 @@
 
         .section h1 {
             font-size: 2.5rem;
-            /* Başlık rengi: Koyu Orman Yeşili (Otorite için) */
-            color: #14532d;
+            /* Başlık rengi index ile uyumlu: ana teal */
+            color: #328792;
             margin-bottom: 60px;
             letter-spacing: -0.5px;
             font-weight: 800;
@@ -46,7 +46,7 @@
 
         /* 3. KART TASARIMI */
         .member {
-            background: #ffffff; /* Kartlar Bembeyaz */
+            background: #ffffff; /* Kartlar beyaz */
             padding: 40px 25px;
             border-radius: 24px;
             width: 280px;
@@ -55,20 +55,20 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             
-            /* İnce, nane yeşili kenarlık */
-            border: 1px solid rgba(74, 222, 128, 0.2);
+            /* İnce, teal tonlu kenarlık (index ile uyumlu) */
+            border: 1px solid rgba(50, 135, 146, 0.08);
             
-            /* Hafif yeşilimsi gölge */
-            box-shadow: 0 10px 30px rgba(20, 83, 45, 0.03);
+            /* Hafif teal gölge */
+            box-shadow: 0 10px 30px rgba(50, 135, 146, 0.06);
         }
 
         /* Kart Hover Efekti */
         .member:hover {
             transform: translateY(-10px);
-            /* Hoverda gölge belirginleşir */
-            box-shadow: 0 20px 40px rgba(22, 163, 74, 0.15);
-            /* Kenarlık rengi canlanır (Mint Green) */
-            border-color: #4ade80;
+            /* Hoverda gölge belirginleşir (teal ton) */
+            box-shadow: 0 20px 40px rgba(50, 135, 146, 0.18);
+            /* Kenarlık rengi canlanır (teal) */
+            border-color: #328792;
         }
 
         /* Resim Alanı */
@@ -78,21 +78,21 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
-            /* Resim çerçevesi: Çok açık nane */
-            border: 4px solid #d1fae5;
+            /* Resim çerçevesi: çok açık teal */
+            border: 4px solid #e6fbfc;
             transition: all 0.3s ease;
         }
 
         .member:hover img {
-            /* Hoverda resim çerçevesi koyu nane/zümrüt rengine döner */
-            border-color: #10b981;
+            /* Hoverda resim çerçevesi teal rengine döner */
+            border-color: #328792;
             transform: scale(1.05);
         }
 
         /* İsim */
         .member h3 {
-            /* İsimler canlı Zümrüt Yeşili (Emerald) */
-            color: #059669;
+            /* İsimler index ile uyumlu ana teal */
+            color: #565656;
             margin: 10px 0 5px;
             font-size: 1.25rem;
             font-weight: 700;
@@ -100,7 +100,7 @@
 
         /* Unvan / Açıklama (Opsiyonel kullanım için) */
         .member p {
-            color: #64748b; /* Gri-Mavi ton, yeşille uyumlu */
+            color: #6b7280; /* index'deki pasif yazı rengiyle uyumlu */
             font-size: 0.95rem;
             font-weight: 500;
         }

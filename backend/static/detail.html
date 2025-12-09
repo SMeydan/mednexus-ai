@@ -14,8 +14,8 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      /* Arka Plan: Yumuşak Nane Geçişi */
-      background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+      /* Arka plan index ile uyumlu: beyazdan teal'a geçiş */
+      background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
       color: #333;
       min-height: 100vh;
     }
@@ -24,13 +24,14 @@
       max-width: 1100px;
       margin: auto;
       padding: 60px 20px;
+      background: transparent; /* içerik kartları beyaz olarak korunacak */
     }
 
     h1 {
       font-size: 2.2rem;
       margin-bottom: 25px;
-      /* Başlık Rengi: Koyu Orman Yeşili */
-      color: #064e3b;
+      /* Başlık Rengi: ana teal (index ile uyumlu) */
+      color: #328792;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
@@ -41,23 +42,22 @@
       padding: 30px;
       border-radius: 16px;
       margin-top: 25px;
-      /* Hafif yeşil/gri gölge */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(16, 185, 129, 0.1);
+      /* Hafif teal gölge */
+      box-shadow: 0 10px 30px rgba(50,135,146,0.03);
+      border: 1px solid rgba(50,135,146,0.08);
       transition: transform 0.2s ease;
     }
     
     .section:hover {
-        box-shadow: 0 15px 40px rgba(16, 185, 129, 0.08);
+        box-shadow: 0 15px 40px rgba(50,135,146,0.08);
     }
 
     .section-title {
       font-size: 1.25rem;
       font-weight: 700;
       margin-bottom: 20px;
-      /* Başlık Rengi: Zümrüt Yeşili */
-      color: #059669;
-      border-bottom: 2px solid #ecfdf5;
+      color: #525252;
+      border-bottom: 2px solid #f3fbfb;
       padding-bottom: 10px;
       display: inline-block;
     }
@@ -83,7 +83,8 @@
     }
     
     .item strong {
-        color: #047857; /* Etiket rengi koyu yeşil */
+        /* Etiket rengi teal uyumlu ton */
+        color: #328792;
     }
 
     /* TEXTAREA */
@@ -104,20 +105,20 @@
 
     textarea:focus {
       outline: none;
-      border-color: #10b981;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      border-color: #328792;
+      box-shadow: 0 0 0 3px rgba(50,135,146,0.1);
     }
 
-    /* BUTONLAR (Modern Yeşil Stil) */
+    /* BUTONLAR (Teal Stil) */
     .btn {
       padding: 12px 24px;
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: linear-gradient(135deg, #5dcbd6, #328792);
       border: none;
       border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
       margin-top: 15px;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 15px rgba(50,135,146,0.25);
       transition: all 0.2s ease;
       color: white;
       font-size: 0.95rem;
@@ -125,20 +126,20 @@
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-      background: linear-gradient(135deg, #34d399, #059669);
+      box-shadow: 0 8px 25px rgba(50,135,146,0.35);
+      background: linear-gradient(135deg, #34dfe4, #328792);
     }
 
     /* OUTPUT ALANI (PRE) */
     pre {
-      background: #f0fdf4; /* Çok açık nane */
+      background: #f4fcfd; /* Çok açık teal-mavi ton (index ile uyumlu) */
       padding: 20px;
       border-radius: 10px;
       white-space: pre-wrap;
       margin-top: 20px;
       font-size: 0.9rem;
-      border: 1px solid #bbf7d0;
-      color: #166534; /* Koyu yeşil yazı */
+      border: 1px solid #e6fbfc;
+      color: #0f6666; /* koyu teal yazı rengi */
       line-height: 1.5;
     }
 
@@ -148,14 +149,14 @@
       display: inline-flex;
       align-items: center;
       cursor: pointer;
-      color: #059669;
+      color: #328792;
       font-weight: 600;
       text-decoration: none;
       transition: color 0.2s;
     }
     
     .back-btn:hover {
-        color: #047857;
+        color: #276b6d;
         text-decoration: underline;
     }
 
@@ -179,9 +180,9 @@
     }
     
     .img-box:hover {
-        border-color: #10b981;
+        border-color: #328792;
         transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 5px 15px rgba(50,135,146,0.08);
     }
 
     @media (max-width: 850px) {

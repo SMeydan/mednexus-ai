@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script>
-    class Header extends HTMLElement { connectedCallback() { this.innerHTML = '<div style="background:#064e3b; height:10px; width:100%;"></div>'; } }
+    class Header extends HTMLElement { connectedCallback() { this.innerHTML = '<div style="background: linear-gradient(90deg, #328792, #5dcbd6); height:10px; width:100%;"></div>'; } }
     class Footer extends HTMLElement { connectedCallback() { this.innerHTML = '<div style="text-align:center; padding:20px; color:#9ca3af; font-size:0.8rem;">MedNexus AI Report System</div>'; } }
     customElements.define('med-header', Header);
     customElements.define('med-footer', Footer);
@@ -17,7 +17,8 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+      /* index.html renk konseptine uyumlu arka plan */
+      background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
       color: #1f2937;
       min-height: 100vh;
     }
@@ -25,25 +26,36 @@
     .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 
     .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-    .page-title h1 { margin: 0; color: #064e3b; font-size: 1.8rem; font-weight: 800; }
+    .page-title h1 { 
+      margin: 0; 
+      /* Başlık rengi: ana teal (index ile uyumlu) */
+      color: #328792; 
+      font-size: 1.8rem; 
+      font-weight: 800; 
+    }
     .page-title p { margin: 5px 0 0; color:#6b7280; }
 
     .action-btn {
       padding: 10px 20px;
       border-radius: 8px;
-      border: 1px solid #10b981;
+      border: 1px solid #328792;
       background: white;
-      color: #10b981;
+      color: #328792;
       font-weight: 600;
       cursor: pointer;
       transition: 0.15s;
     }
-    .action-btn:hover { background:#ecfdf5; transform:translateY(-2px); }
+    .action-btn:hover { 
+      background: #f4fcfd; 
+      transform: translateY(-2px); 
+      box-shadow: 0 4px 12px rgba(50,135,146,0.15);
+    }
     .btn-print {
-      background: linear-gradient(135deg, #10b981, #059669);
+      /* Buton gradyanı: teal (index ile uyumlu) */
+      background: linear-gradient(135deg, #5dcbd6, #328792);
       color: white;
       border: none;
-      box-shadow: 0 4px 10px rgba(16,185,129,0.3);
+      box-shadow: 0 4px 10px rgba(50,135,146,0.3);
     }
 
     .report-card {
@@ -51,26 +63,49 @@
       border-radius: 16px;
       padding: 30px;
       margin-bottom: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-      border: 1px solid rgba(16,185,129,0.15);
+      box-shadow: 0 10px 30px rgba(50,135,146,0.05);
+      /* Hafif teal kenarlık */
+      border: 1px solid rgba(50,135,146,0.08);
     }
 
     .card-title {
       font-size: 1.1rem;
       font-weight: 700;
-      color: #047857;
+      /* Başlık rengi: ana teal */
+      color: #328792;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
+      border-bottom: 2px solid #f4fcfd;
+      padding-bottom: 10px;
     }
 
     /* Patient Info Styles */
     .patient-header { display: flex; gap: 25px; align-items: center; }
-    .patient-photo { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #d1fae5; object-fit: cover; background: #eee; }
+    .patient-photo { 
+      width: 100px; 
+      height: 100px; 
+      border-radius: 50%; 
+      /* Resim çerçevesi: çok açık teal */
+      border: 4px solid #e6fbfc; 
+      object-fit: cover; 
+      background: #eee; 
+    }
     .patient-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
-    .detail-label { font-size: .75rem; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing: 0.5px; }
-    .detail-value { font-size:1.1rem; font-weight:700; color: #111; }
+    .detail-label { 
+      font-size: .75rem; 
+      color: #6b7280; 
+      font-weight: 600; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+    }
+    .detail-value { 
+      font-size: 1.1rem; 
+      font-weight: 700; 
+      /* Değer rengi: ana teal */
+      color: #328792; 
+    }
 
     /* Metrics Grid & Icons */
     .metrics-grid { 
@@ -89,7 +124,12 @@
       overflow: hidden;
       transition: transform 0.2s;
     }
-    .metric-box:hover { transform: translateY(-3px); border-color: #10b981; }
+    .metric-box:hover { 
+      transform: translateY(-3px); 
+      /* Hoverda teal kenarlık */
+      border-color: #328792; 
+      box-shadow: 0 5px 15px rgba(50,135,146,0.1);
+    }
 
     .metric-icon-bg {
       position: absolute;
@@ -97,32 +137,55 @@
       right: 15px;
       width: 40px;
       height: 40px;
-      background: #ecfdf5;
+      /* İkon arka planı: çok açık teal */
+      background: #f4fcfd;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #059669;
+      /* İkon rengi: teal */
+      color: #328792;
     }
     
-    .metric-label { font-size: 0.85rem; color: #6b7280; font-weight: 500; margin-bottom: 5px; }
-    .metric-value { font-size: 1.4rem; font-weight: 800; color: #064e3b; }
-    .metric-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+    .metric-label { 
+      font-size: 0.85rem; 
+      color: #6b7280; 
+      font-weight: 500; 
+      margin-bottom: 5px; 
+    }
+    .metric-value { 
+      font-size: 1.4rem; 
+      font-weight: 800; 
+      /* Değer rengi: koyu teal */
+      color: #0f6666; 
+    }
+    .metric-sub { 
+      font-size: 0.75rem; 
+      color: #9ca3af; 
+      margin-top: 2px; 
+    }
 
     /* Images */
-    .images-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-    .medical-img { width:100%; height:200px; object-fit:cover; border-radius:10px; background: #f3f4f6; }
+    .images-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .medical-img { 
+      width: 100%; 
+      height: 200px; 
+      object-fit: cover; 
+      border-radius: 10px; 
+      border: 2px solid #e6fbfc;
+      background: #f3f4f6; 
+    }
 
     /* Summary & Risk */
     .report-text {
-      background:#f0fdf4;
-      padding:25px;
-      border-radius:10px;
-      border:1px solid #bbf7d0;
-      white-space:pre-wrap;
-      font-size:.95rem;
-      color:#166534;
-      line-height:1.7;
+      background: #f4fcfd;
+      padding: 25px;
+      border-radius: 10px;
+      border: 1px solid #e6fbfc;
+      white-space: pre-wrap;
+      font-size: .95rem;
+      color: #0f6666;
+      line-height: 1.7;
     }
 
     .risk-container {
@@ -134,23 +197,61 @@
     
     .risk-box {
       background: #fff;
-      border: 1px solid #fee2e2;
+      border: 1px solid #e5e7eb;
       border-radius: 12px;
       padding: 20px;
       text-align: center;
+      transition: all 0.3s ease;
     }
-    .risk-box.low { border-color: #bbf7d0; background: #f0fdf4; }
-    .risk-box.moderate { border-color: #fde68a; background: #fffbeb; }
-    .risk-box.high { border-color: #fecaca; background: #fef2f2; }
+    .risk-box.low { 
+      border-color: #e6fbfc; 
+      background: #f4fcfd; 
+    }
+    .risk-box.low .risk-percent {
+      color: #328792;
+    }
+    .risk-box.moderate { 
+      border-color: #fde68a; 
+      background: #fffbeb; 
+    }
+    .risk-box.moderate .risk-percent {
+      color: #d97706;
+    }
+    .risk-box.high { 
+      border-color: #fecaca; 
+      background: #fef2f2; 
+    }
+    .risk-box.high .risk-percent {
+      color: #dc2626;
+    }
 
-    .risk-percent { font-size: 2rem; font-weight: 800; display: block; }
-    .risk-label { font-size: 0.9rem; font-weight: 600; color: #374151; margin-bottom: 5px; display: block;}
-    .risk-diag { font-size: 0.8rem; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 5px;}
+    .risk-percent { 
+      font-size: 2rem; 
+      font-weight: 800; 
+      display: block; 
+    }
+    .risk-label { 
+      font-size: 0.9rem; 
+      font-weight: 600; 
+      color: #374151; 
+      margin-bottom: 5px; 
+      display: block;
+    }
+    .risk-diag { 
+      font-size: 0.8rem; 
+      padding: 4px 8px; 
+      border-radius: 20px; 
+      display: inline-block; 
+      margin-top: 5px;
+      /* Teşhis etiketi teal*/
+      background: #e6fbfc;
+      color: #328792;
+    }
 
     @media print {
-      body { background:white; }
-      med-header, med-footer, .action-btn { display:none !important; }
-      .report-card { box-shadow:none; border:1px solid #ddd; break-inside: avoid; }
+      body { background: white; }
+      med-header, med-footer, .action-btn { display: none !important; }
+      .report-card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
     }
   </style>
 </head>
@@ -314,7 +415,7 @@ if (data.images?.length > 0) {
             imgsHtml += `
                 <div>
                   <img class="medical-img" src="${img.image_path}">
-                  <div style="text-align:center; margin-top:5px; font-size:0.9rem;">
+                  <div style="text-align:center; margin-top:5px; font-size:0.9rem; color:#328792; font-weight:600;">
                       ${img.disease ?? "Scan"}
                   </div>
                 </div>
@@ -331,39 +432,38 @@ let rs = data.result;
 
 let visual = {};
 try {
-    visual = JSON.parse(r.result);
+    visual = JSON.parse(rs.result);
 } catch {}
 
 // HTML oluştur
 let summaryHtml = `
   <div style="margin-bottom:20px;">
-      <strong style="color:#064e3b; font-size:1.1rem;">Diabetes Risk</strong><br>
-      <span style="font-size:1.4rem; font-weight:800;">${(rs.diabetes_risk*100).toFixed(1)}%</span><br>
-      <em style="color:#047857;">${rs.diabetes_diagnosis}</em>
+      <strong style="color:#328792; font-size:1.1rem;">Diabetes Risk</strong><br>
+      <span style="font-size:1.4rem; font-weight:800; color:#0f6666;">${(rs.diabetes_risk*100).toFixed(1)}%</span><br>
+      <em style="color:#328792;">${rs.diabetes_diagnosis}</em>
   </div>
 
   <div style="margin-bottom:20px;">
-      <strong style="color:#064e3b; font-size:1.1rem;">Hypertension Risk</strong><br>
-      <span style="font-size:1.4rem; font-weight:800;">${(rs.hypertension_risk*100).toFixed(1)}%</span><br>
-      <em style="color:#047857;">${rs.hypertension_diagnosis}</em>
+      <strong style="color:#328792; font-size:1.1rem;">Hypertension Risk</strong><br>
+      <span style="font-size:1.4rem; font-weight:800; color:#0f6666;">${(rs.hypertension_risk*100).toFixed(1)}%</span><br>
+      <em style="color:#328792;">${rs.hypertension_diagnosis}</em>
   </div>
 
   <div style="margin-bottom:20px;">
-      <strong style="color:#064e3b; font-size:1.1rem;">Heart Disease Risk</strong><br>
-      <span style="font-size:1.4rem; font-weight:800;">${(rs.heart_disease_risk*100).toFixed(1)}%</span><br>
-      <em style="color:#047857;">${rs.heart_disease_diagnosis}</em>
+      <strong style="color:#328792; font-size:1.1rem;">Heart Disease Risk</strong><br>
+      <span style="font-size:1.4rem; font-weight:800; color:#0f6666;">${(rs.heart_disease_risk*100).toFixed(1)}%</span><br>
+      <em style="color:#328792;">${rs.heart_disease_diagnosis}</em>
   </div>
 `;
-
 
 // Visual model çıktılarını ekle
 for (let key in visual) {
     summaryHtml += `
         <div style="margin-bottom:20px;">
-            <strong style="color:#064e3b; font-size:1.1rem;">
+            <strong style="color:#328792; font-size:1.1rem;">
                 ${key.replace(/_/g," ").toUpperCase()}
             </strong><br>
-            <span style="font-size:1.4rem; font-weight:800;">
+            <span style="font-size:1.4rem; font-weight:800; color:#0f6666;">
                 ${(visual[key] * 100).toFixed(1)}%
             </span>
         </div>
@@ -371,7 +471,6 @@ for (let key in visual) {
 }
 
 summaryBox.innerHTML = summaryHtml;
-
 
   // RISKS
   const r = data.result;
@@ -404,7 +503,6 @@ summaryBox.innerHTML = summaryHtml;
 
 loadReport();
 </script>
-
 
 </body>
 </html>

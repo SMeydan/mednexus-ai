@@ -14,7 +14,8 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+      /* index.html uyumlu arka plan: beyaz -> çok açık teal */
+      background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
       color: #333;
       min-height: 100vh;
     }
@@ -28,8 +29,8 @@
     h1 {
       font-size: 2rem;
       margin-bottom: 25px;
-      /* Başlık Rengi: Koyu Orman Yeşili */
-      color: #064e3b;
+      /* Başlık Rengi: ana teal */
+      color: #328792;
       font-weight: 800;
     }
 
@@ -42,9 +43,9 @@
       padding: 20px 25px;
       border-radius: 12px;
       margin-bottom: 25px;
-      /* Hafif yeşil gölge */
-      box-shadow: 0 10px 30px rgba(6, 95, 70, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.1);
+      /* Hafif teal gölge */
+      box-shadow: 0 10px 30px rgba(50,135,146,0.05);
+      border: 1px solid rgba(50,135,146,0.08);
     }
 
     .filter-bar input {
@@ -60,28 +61,28 @@
 
     .filter-bar input:focus {
       outline: none;
-      border-color: #10b981;
+      border-color: #328792;
       background: #fff;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 0 0 3px rgba(50,135,146,0.06);
     }
 
     /* --- Butonlar --- */
     .btn-outline {
       padding: 10px 24px;
-      /* Zümrüt Yeşili Gradyan */
-      background: linear-gradient(90deg, #10b981, #059669);
+      /* Teal gradyan */
+      background: linear-gradient(90deg, #5dcbd6, #328792);
       border-radius: 8px;
       font-weight: 600;
       border: none;
       cursor: pointer;
       color: white;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+      box-shadow: 0 4px 12px rgba(50,135,146,0.18);
       transition: 0.3s;
     }
 
     .btn-outline:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(5, 150, 105, 0.3);
+      box-shadow: 0 6px 15px rgba(50,135,146,0.28);
     }
 
     /* --- Tablo Alanı --- */
@@ -91,7 +92,7 @@
       padding: 20px;
       /* Kart Gölgesi */
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(50,135,146,0.06);
       overflow-x: auto; /* Mobilde taşarsa scroll olsun */
     }
 
@@ -107,11 +108,11 @@
     }
 
     th {
-      /* Başlık Arka Planı: Çok açık nane */
-      background-color: #ecfdf5;
-      color: #065f46;
+      /* Başlık Arka Planı: Çok açık teal */
+      background-color: #f4fcfd;
+      color: #0f6666;
       font-weight: 700;
-      border-bottom: 2px solid #d1fae5;
+      border-bottom: 2px solid #e6fbfc;
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -129,8 +130,8 @@
     }
 
     tr:hover {
-      /* Hoverda hafif yeşil */
-      background-color: #f0fdf4;
+      /* Hoverda hafif teal */
+      background-color: #f4fcfd;
       transition: background 0.2s ease;
     }
 
@@ -138,15 +139,15 @@
     .view-btn {
       padding: 6px 14px;
       border-radius: 6px;
-      /* Buton Rengi: Zümrüt */
-      background: linear-gradient(90deg, #34d399, #10b981);
+      /* Buton Rengi: Teal */
+      background: linear-gradient(90deg, #5dcbd6, #328792);
       color: white;
       font-weight: 600;
       text-decoration: none;
       display: inline-block;
       font-size: 0.85rem;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 2px 5px rgba(50,135,146,0.18);
       border: none;
       cursor: pointer;
       margin-right: 5px;
@@ -155,18 +156,17 @@
 
     .view-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
-      background: linear-gradient(90deg, #059669, #059669);
+      box-shadow: 0 4px 10px rgba(50,135,146,0.28);
+      background: linear-gradient(90deg, #328792, #328792);
     }
     
-    /* Edit butonu farklı renk olabilir (Opsiyonel - Şimdilik aynı tema) */
     .edit-btn {
-       background: linear-gradient(90deg, #059669, #23c4af); /* Mavi tonu ayırt etmek için */
-       box-shadow: 0 2px 5px rgba(59, 130, 246, 0.2);
+       background: linear-gradient(90deg, #328792, #5dcbd6);
+       box-shadow: 0 2px 5px rgba(50,135,146,0.15);
     }
     .edit-btn:hover {
-        background: linear-gradient(90deg, #059669, #188778);
-        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+        background: linear-gradient(90deg, #328792, #2aaeb0);
+        box-shadow: 0 4px 10px rgba(50,135,146,0.32);
     }
 
 
@@ -207,8 +207,8 @@
     .modal-content h2 {
       margin-top: 0;
       margin-bottom: 20px;
-      color: #064e3b;
-      border-bottom: 1px solid #ecfdf5;
+      color: #328792;
+      border-bottom: 1px solid #f4fcfd;
       padding-bottom: 10px;
     }
 
@@ -238,8 +238,9 @@
     .modal-content select:focus,
     .modal-content textarea:focus {
         outline: none;
-        border-color: #10b981;
+        border-color: #328792;
         background: #fff;
+        box-shadow: 0 0 0 3px rgba(50,135,146,0.06);
     }
 
     .modal-actions {
@@ -267,19 +268,19 @@
 
     .btn-save {
       padding: 10px 24px;
-      background: linear-gradient(90deg, #10b981, #059669);
+      background: linear-gradient(90deg, #5dcbd6, #328792);
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
       color: #fff;
-      box-shadow: 0 2px 5px rgba(5, 150, 105, 0.2);
+      box-shadow: 0 2px 5px rgba(50,135,146,0.18);
       transition: all 0.2s;
     }
     
     .btn-save:hover {
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        box-shadow: 0 4px 12px rgba(50,135,146,0.32);
     }
   </style>
 </head>
@@ -319,7 +320,6 @@
   </div>
 
   <med-footer></med-footer>
-
 
   <div id="patientModal" class="modal">
     <div class="modal-content">

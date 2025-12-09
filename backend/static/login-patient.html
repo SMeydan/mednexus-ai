@@ -13,8 +13,8 @@
       margin: 0;
       font-family: 'Inter', sans-serif;
       height: 100vh;
-      /* Arka plan: Ferah nane yeşili geçişi */
-      background: linear-gradient(135deg, #f0fdf4 0%, #ccfbf1 100%);
+      /* Arka plan: index.html ile uyumlu beyaz -> çok açık teal */
+      background: linear-gradient(180deg, #f4fcfd 0%, #e1f5f7 100%);
       color: #333;
       display: flex;
       flex-direction: column;
@@ -28,23 +28,23 @@
       width: 100%;
       max-width: 420px;
       margin: auto;
-      /* Hafif yeşil gölge */
-      box-shadow: 0 20px 50px rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      /* Hafif teal gölge */
+      box-shadow: 0 20px 50px rgba(50,135,146,0.08);
+      border: 1px solid rgba(50,135,146,0.12);
       text-align: center;
       position: relative;
       box-sizing: border-box;
     }
 
-    /* Animasyonlu Kenarlık Efekti - Yeşil Tonlarında */
+    /* Animasyonlu Kenarlık Efekti - Teal Tonlarında */
     .login-container::before {
         content: "";
         position: absolute;
         inset: 0;
         border-radius: 12px;
         padding: 2px;
-        /* Renkler: Nane yeşili -> Zümrüt -> Nane */
-        background: linear-gradient(90deg, #34d399, #059669, #34d399);
+        /* Renkler: açık teal -> ana teal -> açık teal */
+        background: linear-gradient(90deg, #5dcbd6, #328792, #5dcbd6);
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
@@ -60,8 +60,8 @@
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
-      /* Başlık rengi: Koyu Yeşil */
-      color: #064e3b; 
+      /* Başlık rengi: ana teal */
+      color: #328792;
       font-weight: 800;
     }
 
@@ -73,7 +73,7 @@
     label {
       display: block;
       margin-bottom: 0.4rem;
-      /* Label rengi: Koyu gri/yeşil */
+      /* Label rengi: Koyu gri */
       color: #374151;
       font-size: 0.95rem;
       font-weight: 600;
@@ -94,12 +94,12 @@
     }
 
     input:focus {
-      /* Focus olunca kenarlık yeşil */
-      border-color: #10b981;
+      /* Focus olunca kenarlık teal */
+      border-color: #328792;
       background-color: #fff;
       outline: none;
-      /* Focus gölgesi */
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      /* Focus gölgesi (teal ton) */
+      box-shadow: 0 0 0 3px rgba(50,135,146,0.12);
     }
     
     input::placeholder {
@@ -111,8 +111,8 @@
       padding: 0.85rem;
       border: none;
       border-radius: 8px;
-      /* Buton Gradient: Yeşil tonları */
-      background: linear-gradient(90deg, #10b981, #059669);
+      /* Buton Gradient: Teal tonları */
+      background: linear-gradient(90deg, #5dcbd6, #328792);
       color: #fff;
       font-weight: 700;
       font-size: 1rem;
@@ -123,20 +123,20 @@
 
     .login-btn:hover {
       transform: translateY(-2px);
-      /* Hover gölgesi */
-      box-shadow: 0 10px 20px rgba(5, 150, 105, 0.3);
+      /* Hover gölgesi (teal) */
+      box-shadow: 0 10px 20px rgba(50,135,146,0.24);
     }
 
     .message {
       margin-top: 1.5rem;
       font-size: 0.95rem;
       font-weight: 600;
-      color: #ef4444; /* Hata mesajı kırmızı */
+      color: #ef4444; /* Hata mesajı kırmızı (korundu) */
       display: none;
     }
 
     .success {
-      color: #059669; /* Başarılı mesajı yeşil */
+      color: #328792; /* Başarılı mesajı teal */
     }
 
   </style>
@@ -178,7 +178,7 @@
         localStorage.setItem('userName', 'doctor');
         setTimeout(() => {
           window.location.href = "/chat-patient?patient_id=3"; // yönlendirme sayfası
-        }, 800); // Kullanıcı mesajı görsün diye süreyi biraz artırdım
+        }, 800);
       } else {
         message.textContent = "❌ Invalid username or password.";
         message.classList.remove("success");
